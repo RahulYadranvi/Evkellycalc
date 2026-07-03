@@ -1,0 +1,47 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Contact Support | EV Kelly Calculator"
+  description="Get in touch with our team for technical support, algorithmic modeling questions, or business inquiries."
+>
+  <div class="max-w-[800px] mx-auto w-full min-h-screen px-4 py-16 md:py-24 flex flex-col items-center">
+    
+    <header class="flex flex-col items-center text-center mb-10 sm:mb-14">
+      <h1 class="animate-reveal text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--theme-text-main)] mb-4" style="opacity: 0;">
+        Get in Touch
+      </h1>
+      <p class="animate-reveal delay-100 text-lg sm:text-xl text-[var(--theme-text-muted)] font-medium max-w-xl leading-relaxed" style="opacity: 0;">
+        Whether you have a question about the mathematics, found a bug, or want to suggest a new feature, we are here to help.
+      </p>
+    </header>
+
+    <div class="animate-reveal delay-200 liquid-panel static-panel w-full p-8 sm:p-12 flex flex-col items-center gap-8 text-center" style="opacity: 0;">
+      
+      <div class="flex flex-col items-center gap-4 w-full">
+        <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Direct Email Support</h2>
+        <p class="text-base text-[var(--theme-text-muted)] max-w-lg leading-relaxed mb-4">
+          To ensure the highest level of privacy and data security, we do not route user messages through third-party contact forms. Drop us an email and we will respond promptly.
+        </p>
+        
+        <!-- Standard liquid button with shine animation -->
+        <a href="mailto:support@evkellycalc.com" class="liquid-btn inline-flex items-center justify-center px-10 py-4 text-lg font-bold tracking-tight">
+          Email Support
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full pt-8 mt-2 border-t border-[var(--liquid-input-border)] text-left">
+        <div class="flex flex-col gap-2 p-6 rounded-[var(--theme-radius-input)] bg-[var(--liquid-input-bg)] border border-[var(--liquid-input-border)]">
+          <h3 class="text-base font-bold text-[var(--theme-text-main)]">Technical Support</h3>
+          <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed">Experiencing a bug? Please include your browser version and operating system.</p>
+        </div>
+        <div class="flex flex-col gap-2 p-6 rounded-[var(--theme-radius-input)] bg-[var(--liquid-input-bg)] border border-[var(--liquid-input-border)]">
+          <h3 class="text-base font-bold text-[var(--theme-text-main)]">Business Inquiries</h3>
+          <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed">For media requests or potential partnerships, please use the subject line "Partnership".</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Layout>

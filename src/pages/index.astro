@@ -1,0 +1,813 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="EV Kelly Calculator | Position Sizing & Variance Mechanics"
+  description="Calculate your mathematical edge, fractional Kelly sizing, and Risk of Ruin with our free quantitative finance position sizing tool."
+>
+  <main class="max-w-[1400px] mx-auto w-full px-4 sm:px-8 md:px-16 pt-2 pb-0">
+    <div class="flex-1 px-4 sm:px-8 md:px-16 lg:px-24 pt-0 pb-4 flex flex-col gap-6 relative">
+
+      <header class="max-w-[1100px] mx-auto mb-10 sm:mb-14 flex flex-col items-center text-center">
+        <h1 class="animate-reveal text-4xl sm:text-5xl md:text-8xl leading-tight font-bold tracking-tighter mb-3 sm:mb-4 text-[var(--theme-text-main)]" style="opacity: 0;">
+          Quantitative Sizing.
+        </h1>
+        <p class="animate-reveal delay-100 max-w-1xl text-lg sm:text-xl text-[var(--theme-text-muted)] leading-relaxed font-medium tracking-tight mb-8" style="opacity: 0;">
+          Track algorithmic trade edges, win probabilities, and optimal capital allocation. 
+        </p>
+        <a href="/how-it-works" class="animate-reveal delay-200 liquid-btn inline-flex items-center justify-center text-base sm:text-lg font-semibold tracking-tight px-10 py-3 sm:py-4" style="opacity: 0;">
+          How it Works
+        </a>
+      </header>
+
+      <div class="grid grid-cols-1 xl:grid-cols-12 gap-6 lg:gap-10">
+        
+        <div class="xl:col-span-4 flex flex-col gap-6 sm:gap-8 min-w-0 xl:h-full">
+          
+          <div class="liquid-panel static-panel w-full p-6 sm:p-8 md:p-10 flex flex-col gap-6 sm:gap-8">
+            <h2 class="text-xl sm:text-2xl font-semibold tracking-tight text-[var(--theme-text-main)]">Parameters</h2>
+            
+            <div class="flex flex-col gap-4 sm:gap-6">
+              <div class="flex flex-col gap-2 relative">
+                <label for="winProb" class="text-sm font-medium text-[var(--theme-text-muted)] tracking-tight">Trade Win Rate (%)</label>
+                <input type="number" id="winProb" class="liquid-input w-full text-lg font-medium p-3 sm:p-4 placeholder:text-gray-600" placeholder="e.g., 65" step="0.1" min="0" max="100" />
+                <div id="winProbError" class="hidden text-xs font-bold text-[var(--theme-accent-red)] mt-1 flex items-center gap-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                  Win rate cannot exceed 100%.
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-2 relative">
+                <label for="rewardRisk" class="text-sm font-medium text-[var(--theme-text-muted)] tracking-tight">Reward-to-Risk Ratio (Net)</label>
+                <input type="number" id="rewardRisk" class="liquid-input w-full text-lg font-medium p-3 sm:p-4 placeholder:text-gray-600" placeholder="e.g., 1.5" step="0.05" min="0.01" />
+              </div>
+
+              <div class="flex flex-col gap-2 relative">
+                <label for="capital" class="text-sm font-medium text-[var(--theme-text-muted)] tracking-tight">Total Capital ($)</label>
+                <input type="number" id="capital" class="liquid-input w-full text-lg font-medium p-3 sm:p-4 placeholder:text-gray-600" placeholder="e.g., 1000" step="100" min="1" max="1000000000" />
+              </div>
+
+              <div class="flex flex-col gap-2 relative">
+                <label for="stopLoss" class="text-sm font-medium text-[var(--theme-text-muted)] tracking-tight">Stop Loss Limit (%)</label>
+                <input type="number" id="stopLoss" class="liquid-input w-full text-lg font-medium p-3 sm:p-4 placeholder:text-gray-600" placeholder="e.g., 20" step="1" min="1" max="99" />
+              </div>
+            </div>
+            
+            <button id="calcBtn" class="liquid-btn mt-1 sm:mt-2 w-full text-lg font-semibold tracking-tight py-3 sm:py-4">Calculate Edge</button>
+          </div>
+
+          <div class="liquid-panel static-panel flex-1 w-full p-6 sm:p-8 flex flex-col gap-5">
+            <h3 class="text-base sm:text-lg font-semibold tracking-tight text-[var(--theme-text-main)] flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--theme-text-muted)]"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              Kelly Variance Mechanics
+            </h3>
+            
+            <div class="flex flex-col gap-4">
+              <div class="flex justify-between items-center border-b border-[var(--liquid-input-border)] pb-3 sm:pb-4">
+                  <div class="flex flex-col">
+                    <span class="text-xs sm:text-sm font-semibold text-[var(--theme-text-main)]">Full Kelly</span>
+                    <span class="text-[10px] sm:text-xs font-medium text-[var(--theme-text-muted)]">Max theoretical growth</span>
+                  </div>
+                  <span class="text-xs sm:text-sm font-bold text-[var(--theme-accent-blue)]">100% Volatility</span>
+              </div>
+              
+              <div class="flex justify-between items-center border-b border-[var(--liquid-input-border)] pb-3 sm:pb-4">
+                  <div class="flex flex-col">
+                    <span class="text-xs sm:text-sm font-semibold text-[var(--theme-text-main)]">Half Kelly</span>
+                    <span class="text-[10px] sm:text-xs font-medium text-[var(--theme-text-muted)]">75% of max growth</span>
+                  </div>
+                  <span class="text-xs sm:text-sm font-bold text-[var(--theme-accent-green)]">25% Volatility</span>
+              </div>
+              
+              <div class="flex justify-between items-center">
+                  <div class="flex flex-col">
+                    <span class="text-xs sm:text-sm font-semibold text-[var(--theme-text-main)]">Quarter Kelly</span>
+                    <span class="text-[10px] sm:text-xs font-medium text-[var(--theme-text-muted)]">Safest compounding</span>
+                  </div>
+                  <span class="text-xs sm:text-sm font-bold text-[var(--theme-text-muted)]">6% Volatility</span>
+              </div>
+            </div>
+
+            <div class="mt-4 xl:mt-auto p-3 sm:p-4 rounded-[var(--theme-radius-input)] bg-[var(--liquid-input-bg)] border border-[var(--liquid-input-border)]">
+              <p class="text-[10px] sm:text-xs text-[var(--theme-text-muted)] leading-relaxed font-medium">
+                Trading Full Kelly virtually guarantees severe drawdowns. Institutional arbitrageurs rarely exceed Quarter Kelly to preserve capital during variance swings.
+              </p>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="xl:col-span-8 relative">
+          
+          <div id="resultsWrapper" class="flex flex-col gap-6 sm:gap-8 min-w-0 w-full xl:h-full">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 w-full">
+              <div class="liquid-panel p-4 sm:p-5 flex flex-col items-start justify-center overflow-hidden min-w-0">
+                <div class="text-[10px] sm:text-xs font-semibold tracking-wide text-[var(--theme-text-muted)] uppercase mb-1">Expected Value</div>
+                <div id="evOutput" class="text-xl sm:text-2xl lg:text-2xl font-bold tracking-tight text-[var(--theme-text-main)] truncate w-full">0.00%</div>
+                <div class="text-xs sm:text-sm font-medium mt-1 truncate w-full opacity-0 pointer-events-none select-none">&nbsp;</div>
+              </div>
+              <div class="liquid-panel p-4 sm:p-5 flex flex-col items-start justify-center overflow-hidden min-w-0">
+                <div class="text-[10px] sm:text-xs font-semibold tracking-wide text-[var(--theme-accent-blue)] uppercase mb-1">Full Kelly</div>
+                <div id="fullKellyOutput" class="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight text-[var(--theme-text-main)] truncate w-full">0.00%</div>
+                <div id="fullKellyAmt" class="text-xs sm:text-sm font-medium text-[var(--theme-text-muted)] mt-1 truncate w-full">$0</div>
+              </div>
+              <div class="liquid-panel p-4 sm:p-5 flex flex-col items-start justify-center overflow-hidden min-w-0">
+                <div class="text-[10px] sm:text-xs font-semibold tracking-wide text-[var(--theme-accent-green)] uppercase mb-1">Half Kelly</div>
+                <div id="halfKellyOutput" class="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight text-[var(--theme-text-main)] truncate w-full">0.00%</div>
+                <div id="halfKellyAmt" class="text-xs sm:text-sm font-medium text-[var(--theme-text-muted)] mt-1 truncate w-full">$0</div>
+              </div>
+              <div class="liquid-panel p-4 sm:p-5 flex flex-col items-start justify-center overflow-hidden min-w-0">
+                <div class="text-[10px] sm:text-xs font-semibold tracking-wide text-[var(--theme-text-muted)] uppercase mb-1">Quarter Kelly</div>
+                <div id="quarterKellyOutput" class="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight text-[var(--theme-text-main)] truncate w-full">0.00%</div>
+                <div id="quarterKellyAmt" class="text-xs sm:text-sm font-medium text-[var(--theme-text-muted)] mt-1 truncate w-full">$0</div>
+              </div>
+            </div>
+
+            <div class="liquid-panel static-panel w-full p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
+              <div class="flex flex-col gap-1 min-w-0">
+                <div class="text-xs sm:text-sm font-semibold uppercase tracking-wide text-[var(--theme-accent-red)]">Risk of Ruin</div>
+                <div id="rorDesc" class="text-sm sm:text-base text-[var(--theme-text-muted)] font-medium">Probability of hitting stop loss using Half Kelly.</div>
+              </div>
+              <div id="rorOutput" class="text-4xl sm:text-5xl font-bold tracking-tighter text-[var(--theme-text-main)] flex-shrink-0">0.00%</div>
+            </div>
+
+            <div class="liquid-panel static-panel flex-1 w-full min-w-0 overflow-hidden p-6 md:p-10 flex flex-col gap-6 sm:gap-8">
+              
+              <div class="flex flex-col gap-1 sm:gap-2">
+                <h2 class="text-xl sm:text-2xl font-semibold tracking-tight text-[var(--theme-text-main)]">Growth Expectancy</h2>
+                <p class="text-sm sm:text-base text-[var(--theme-text-muted)] font-medium">Projected capital trajectory over 100 sequential events.</p>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-4 border-t border-[var(--liquid-input-border)]">
+                <div class="flex flex-col min-w-0">
+                  <span class="text-xs sm:text-sm font-semibold text-[var(--theme-accent-blue)] mb-0.5 sm:mb-1">Final Full Kelly</span>
+                  <span id="finalFull" class="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--theme-text-main)] truncate" title="Final Full Kelly Capital">$0</span>
+                </div>
+                <div class="flex flex-col min-w-0">
+                  <span class="text-xs sm:text-sm font-semibold text-[var(--theme-accent-green)] mb-0.5 sm:mb-1">Final Half Kelly</span>
+                  <span id="finalHalf" class="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--theme-text-main)] truncate" title="Final Half Kelly Capital">$0</span>
+                </div>
+                <div class="flex flex-col min-w-0">
+                  <span class="text-xs sm:text-sm font-semibold text-[var(--theme-text-muted)] mb-0.5 sm:mb-1">Final Quarter Kelly</span>
+                  <span id="finalQuarter" class="text-2xl sm:text-3xl font-bold tracking-tight text-[var(--theme-text-main)] truncate" title="Final Quarter Kelly Capital">$0</span>
+                </div>
+              </div>
+
+              <div class="w-full h-[250px] sm:h-[300px] md:h-[360px] relative mt-2 sm:mt-4">
+                <canvas id="growthChart"></canvas>
+              </div>
+
+              <div class="mt-2 sm:mt-4 pt-4 sm:pt-6 border-t border-[var(--liquid-input-border)] grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                <div class="flex flex-col gap-1.5 sm:gap-2">
+                  <span class="text-[10px] sm:text-xs font-bold text-[var(--theme-text-muted)] uppercase tracking-wider flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--theme-accent-blue)]"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    Model Assumptions
+                  </span>
+                  <span class="text-xs sm:text-sm text-gray-300 font-medium leading-relaxed pr-2 sm:pr-4">
+                    Projections assume zero slippage, continuous liquidity, and a strictly static probabilistic edge across exactly 100 discrete executions.
+                  </span>
+                </div>
+                <div class="flex flex-col gap-1.5 sm:gap-2">
+                  <span class="text-[10px] sm:text-xs font-bold text-[var(--theme-text-muted)] uppercase tracking-wider flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-[var(--theme-accent-red)]"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    Deterministic Limitation
+                  </span>
+                  <span class="text-xs sm:text-sm text-gray-300 font-medium leading-relaxed pr-2 sm:pr-4">
+                    This plot visualizes the median geometric expectancy. Real-world stochastic variance (actual trading paths) will deviate heavily from this curve.
+                  </span>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-16 md:mt-24 w-full mx-auto pt-16 border-t border-white/[0.05]">
+        <div class="flex flex-col items-center text-center mb-12 sm:mb-16">
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-[var(--theme-text-main)] mb-6 max-w-3xl">
+            The Ultimate EV Kelly Calculator for Optimal Position Sizing
+          </h2>
+          <p class="text-base sm:text-lg text-[var(--theme-text-muted)] font-medium max-w-4xl leading-relaxed mb-4">
+            Navigating financial markets, whether you are executing algorithmic data arbitrage or managing a discretionary swing trading portfolio, requires more than just a profitable strategy. It requires mathematical precision in capital allocation. Our free online EV Kelly Calculator is an institutional-grade position sizing tool designed to help traders calculate their exact mathematical edge and protect their bankroll from inevitable statistical variance.
+          </p>
+          <p class="text-base sm:text-lg text-[var(--theme-text-muted)] font-medium max-w-4xl leading-relaxed">
+            Most retail traders fail not because their strategies lack edge, but because their position sizing is fundamentally flawed. By over-leveraging during winning streaks and under-allocating during drawdowns, they invite massive volatility into their equity curves. The Kelly Criterion solves this by mathematically dictating the optimal fraction of your capital to risk on any single probabilistic event to maximize long-term geometric compounding.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div class="liquid-panel static-panel p-8 flex flex-col gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-[var(--theme-accent-blue)]/10 flex items-center justify-center mb-2 border border-[var(--theme-accent-blue)]/20">
+               <svg class="w-6 h-6 text-[var(--theme-accent-blue)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white">Understanding Expected Value (EV)</h3>
+            <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed">
+              Before you can utilize the Kelly formula, you must first prove that your strategy possesses a positive Expected Value (EV). Expected Value is the average theoretical outcome of a trade if it were executed infinitely under identical conditions. It factors in your historical win probability alongside your net reward-to-risk ratio. If your EV is negative, no money management system in the world can save your account from eventual depletion. Our calculator automatically computes your EV percentage the moment you input your metrics, ensuring you only apply leverage to systems with a mathematically verified positive edge.
+            </p>
+          </div>
+
+          <div class="liquid-panel static-panel p-8 flex flex-col gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-[var(--theme-accent-green)]/10 flex items-center justify-center mb-2 border border-[var(--theme-accent-green)]/20">
+               <svg class="w-6 h-6 text-[var(--theme-accent-green)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white">Fractional Sizing Options</h3>
+            <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed">
+              While the standard Kelly Criterion (Full Kelly) guarantees the highest theoretical capital growth, it operates at the absolute limit of volatility. Trading at Full Kelly means you will routinely experience portfolio drawdowns exceeding 50%, which is psychologically devastating. To combat this, professional quantitative firms utilize Fractional Kelly sizing. Half Kelly provides roughly 75% of the maximum theoretical compounding power while slashing variance. Quarter Kelly offers a smooth, highly sustainable equity curve for maximum safety.
+            </p>
+          </div>
+
+          <div class="liquid-panel static-panel p-8 flex flex-col gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-[var(--theme-accent-red)]/10 flex items-center justify-center mb-2 border border-[var(--theme-accent-red)]/20">
+               <svg class="w-6 h-6 text-[var(--theme-accent-red)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold text-white">Mitigating the Risk of Ruin</h3>
+            <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed">
+              Risk of Ruin is the statistical probability that your account balance will hit your predefined stop-loss limit, ending your ability to trade. A high win rate does not make you immune to ruin if your sizing is too aggressive. A series of consecutive losses can wipe out an over-leveraged account in a matter of hours. By inputting your hard stop-loss limit into our calculator, the engine will instantly output your precise Risk of Ruin percentage. Adjust your fractional allocation downward until your Risk of Ruin approaches zero.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 md:mt-12 w-full max-w-[800px] mx-auto pt-8 border-t border-white/[0.05]">
+        <header class="flex flex-col items-center text-center mb-8">
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-3">Frequently Asked Questions</h2>
+          <p class="text-sm sm:text-base text-[var(--theme-text-muted)] font-medium">Core concepts behind mathematical position sizing and variance.</p>
+        </header>
+
+        <div class="flex flex-col gap-3 faq-container">
+          
+          <div class="liquid-panel static-panel faq-item overflow-hidden transition-all duration-300 rounded-xl">
+            <button class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
+              <h3 class="text-base sm:text-lg font-semibold text-white pr-6">What is the Kelly Criterion in trading?</h3>
+              <div class="relative flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white/5 rounded-full border border-white/10">
+                 <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] transition-transform duration-300 rounded-full"></span>
+                 <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] rotate-90 transition-transform duration-300 faq-vertical-line rounded-full"></span>
+              </div>
+            </button>
+            <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+              <div class="overflow-hidden">
+                <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
+                  The Kelly Criterion is a mathematical formula that calculates the exact optimal fraction of your capital to risk on a single trade. It mathematically maximizes long-term geometric compounding while preventing total account ruin.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="liquid-panel static-panel faq-item overflow-hidden transition-all duration-300 rounded-xl">
+            <button class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
+              <h3 class="text-base sm:text-lg font-semibold text-white pr-6">What is Expected Value (EV)?</h3>
+              <div class="relative flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white/5 rounded-full border border-white/10">
+                 <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] transition-transform duration-300 rounded-full"></span>
+                 <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] rotate-90 transition-transform duration-300 faq-vertical-line rounded-full"></span>
+              </div>
+            </button>
+            <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+              <div class="overflow-hidden">
+                <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
+                  Expected Value (EV) is the average mathematical outcome of a trade if it were repeated infinitely. A positive EV means a strategy is profitable over time, which is required before applying the Kelly formula.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="liquid-panel static-panel faq-item overflow-hidden transition-all duration-300 rounded-xl">
+            <button class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
+              <h3 class="text-base sm:text-lg font-semibold text-white pr-6">Why should I use Half or Quarter Kelly?</h3>
+              <div class="relative flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white/5 rounded-full border border-white/10">
+                 <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] transition-transform duration-300 rounded-full"></span>
+                 <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] rotate-90 transition-transform duration-300 faq-vertical-line rounded-full"></span>
+              </div>
+            </button>
+            <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+              <div class="overflow-hidden">
+                <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
+                  Trading "Full Kelly" guarantees massive drawdowns due to normal statistical variance. Half and Quarter Kelly drastically reduce your volatility and Risk of Ruin while still capturing the vast majority of the optimal compounding curve.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="liquid-panel static-panel faq-item overflow-hidden transition-all duration-300 rounded-xl">
+            <button class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
+              <h3 class="text-base sm:text-lg font-semibold text-white pr-6">What does Risk of Ruin mean?</h3>
+              <div class="relative flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white/5 rounded-full border border-white/10">
+                 <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] transition-transform duration-300 rounded-full"></span>
+                 <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] rotate-90 transition-transform duration-300 faq-vertical-line rounded-full"></span>
+              </div>
+            </button>
+            <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+              <div class="overflow-hidden">
+                <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
+                  Risk of Ruin is the statistical probability that your trading account will hit your defined stop-loss limit based on your current win rate, reward-to-risk ratio, and position size.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="liquid-panel static-panel faq-item overflow-hidden transition-all duration-300 rounded-xl">
+            <button class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
+              <h3 class="text-base sm:text-lg font-semibold text-white pr-6">How do I calculate my Reward-to-Risk ratio?</h3>
+              <div class="relative flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white/5 rounded-full border border-white/10">
+                 <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] transition-transform duration-300 rounded-full"></span>
+                 <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] rotate-90 transition-transform duration-300 faq-vertical-line rounded-full"></span>
+              </div>
+            </button>
+            <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+              <div class="overflow-hidden">
+                <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
+                  Divide your average net profit on winning trades by your average net loss on losing trades. For example, if you risk $100 to make $200, your net Reward-to-Risk ratio is 2.0.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="liquid-panel static-panel faq-item overflow-hidden transition-all duration-300 rounded-xl">
+            <button class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
+              <h3 class="text-base sm:text-lg font-semibold text-white pr-6">What happens if my win rate is below 50%?</h3>
+              <div class="relative flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white/5 rounded-full border border-white/10">
+                 <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] transition-transform duration-300 rounded-full"></span>
+                 <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] rotate-90 transition-transform duration-300 faq-vertical-line rounded-full"></span>
+              </div>
+            </button>
+            <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+              <div class="overflow-hidden">
+                <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
+                  You can still have a highly profitable Expected Value with a win rate below 50%, provided your Reward-to-Risk ratio is exceptionally high. The calculator will automatically account for this and provide the correct fractional sizing.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="liquid-panel static-panel faq-item overflow-hidden transition-all duration-300 rounded-xl">
+            <button class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
+              <h3 class="text-base sm:text-lg font-semibold text-white pr-6">Does the Kelly Criterion account for slippage and commissions?</h3>
+              <div class="relative flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white/5 rounded-full border border-white/10">
+                 <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] transition-transform duration-300 rounded-full"></span>
+                 <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] rotate-90 transition-transform duration-300 faq-vertical-line rounded-full"></span>
+              </div>
+            </button>
+            <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+              <div class="overflow-hidden">
+                <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
+                  No. The raw mathematical formula assumes frictionless execution. To get an accurate calculation, you must input your <i>net</i> metrics—meaning your average wins and losses should already have slippage and broker fees subtracted before calculating your ratio.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="liquid-panel static-panel faq-item overflow-hidden transition-all duration-300 rounded-xl">
+            <button class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
+              <h3 class="text-base sm:text-lg font-semibold text-white pr-6">Can I use this calculator for crypto and forex?</h3>
+              <div class="relative flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white/5 rounded-full border border-white/10">
+                 <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] transition-transform duration-300 rounded-full"></span>
+                 <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] rotate-90 transition-transform duration-300 faq-vertical-line rounded-full"></span>
+              </div>
+            </button>
+            <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+              <div class="overflow-hidden">
+                <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
+                  Yes. The math behind the Kelly formula is universal. As long as you know your historical win rate and net reward-to-risk ratio, you can use the engine to optimize sizing for stocks, crypto, forex, or any probabilistic event.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+</Layout>
+
+<script>
+  import Chart from 'chart.js/auto';
+
+  let growthChart: Chart | null = null;
+  let dom: Record<string, HTMLElement | HTMLInputElement> = {};
+  
+  function initDOM() {
+    const ids = [
+      'winProb', 'rewardRisk', 'capital', 'stopLoss', 'evOutput',
+      'fullKellyOutput', 'fullKellyAmt', 'halfKellyOutput', 'halfKellyAmt',
+      'quarterKellyOutput', 'quarterKellyAmt', 'rorOutput', 'rorDesc', 'calcBtn', 'growthChart',
+      'finalFull', 'finalHalf', 'finalQuarter', 'winProbError'
+    ];
+    
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) dom[id] = el;
+    });
+
+    Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+  }
+
+  function formatCurrency(value: number, compact: boolean = false): string {
+    if (value === 0) return "$0";
+    if (value < 0) return "-" + formatCurrency(-value, compact);
+    
+    if (value >= 1e15) {
+      return "$" + value.toExponential(2);
+    }
+
+    if (!compact || value < 1000000) {
+      return new Intl.NumberFormat('en-US', { 
+        style: 'currency', 
+        currency: 'USD',
+        maximumFractionDigits: 0
+      }).format(value);
+    }
+    
+    const suffixes = ["", "K", "M", "B", "T"];
+    let magnitude = Math.floor(Math.log10(value) / 3);
+    
+    if (magnitude >= suffixes.length) {
+      magnitude = suffixes.length - 1; 
+    }
+    
+    const scaled = value / Math.pow(10, magnitude * 3);
+    
+    const formatted = new Intl.NumberFormat('en-US', {
+      maximumFractionDigits: 2
+    }).format(scaled);
+    
+    return "$" + formatted + suffixes[magnitude];
+  }
+
+  function calculate() {
+    const winInput = dom.winProb as HTMLInputElement;
+    const rewardInput = dom.rewardRisk as HTMLInputElement;
+    const capInput = dom.capital as HTMLInputElement;
+    const stopInput = dom.stopLoss as HTMLInputElement;
+
+    // 1. INSTANT VALIDATION (Triggered on keystroke, regardless of empty fields)
+    let winErrorActive = false;
+    if (winInput.value !== '') {
+      let rawWin = parseFloat(winInput.value);
+      if (rawWin > 100) {
+        winInput.value = ''; // Instantly clear the field
+        if (dom.winProbError) dom.winProbError.classList.remove('hidden'); // Throw error
+        winErrorActive = true;
+      } else if (rawWin < 0) {
+        winInput.value = '';
+        if (dom.winProbError) dom.winProbError.classList.add('hidden');
+      } else {
+        if (dom.winProbError) dom.winProbError.classList.add('hidden');
+      }
+    }
+
+    // Hide error automatically if user manually backspaces to empty
+    if (winInput.value === '' && !winErrorActive) {
+      if (dom.winProbError) dom.winProbError.classList.add('hidden');
+    }
+
+    // Silently fix stop loss bounds
+    if (stopInput.value !== '') {
+      let rawStop = parseFloat(stopInput.value);
+      if (rawStop > 99 || rawStop < 1) {
+        stopInput.value = '';
+      }
+    }
+
+    // 2. ZERO STATE RE-RENDER
+    if (winInput.value === '' || rewardInput.value === '' || capInput.value === '' || stopInput.value === '') {
+        if (dom.evOutput) {
+          dom.evOutput.style.color = 'inherit';
+          dom.evOutput.textContent = '0.00%';
+        }
+        
+        if (dom.fullKellyOutput) dom.fullKellyOutput.textContent = '0.00%';
+        if (dom.fullKellyAmt) dom.fullKellyAmt.textContent = '$0';
+        
+        if (dom.halfKellyOutput) dom.halfKellyOutput.textContent = '0.00%';
+        if (dom.halfKellyAmt) dom.halfKellyAmt.textContent = '$0';
+        
+        if (dom.quarterKellyOutput) dom.quarterKellyOutput.textContent = '0.00%';
+        if (dom.quarterKellyAmt) dom.quarterKellyAmt.textContent = '$0';
+        
+        if (dom.rorOutput) dom.rorOutput.textContent = '0.00%';
+        if (dom.rorDesc) dom.rorDesc.innerHTML = `Probability of hitting stop loss using Half Kelly.`;
+        
+        updateChart(0, 0, 0, 0, 0, 0); 
+        return; 
+    }
+
+    // 3. MATH ENGINE EXECUTION
+    let rawWinProb = parseFloat(winInput.value) || 0;
+    let rawRewardRisk = parseFloat(rewardInput.value) || 0;
+    let rawCapital = parseFloat(capInput.value) || 0;
+    let rawStopLoss = parseFloat(stopInput.value) || 0;
+
+    const p = rawWinProb / 100;
+    const b = Math.max(0.01, Math.min(10000, rawRewardRisk));
+    const capital = Math.max(1, Math.min(1000000000, rawCapital)); 
+    const stopLoss = rawStopLoss / 100;
+    const q = 1 - p;
+    
+    const ev = (p * b) - q;
+    const evPercentage = ev * 100;
+
+    let fullKelly = b > 0 ? ((p * b) - q) / b : 0;
+    fullKelly = Math.max(0, fullKelly); 
+
+    const halfKelly = fullKelly / 2;
+    const quarterKelly = fullKelly / 4;
+
+    let ror = 1.0; 
+    if (fullKelly > 0 && ev > 0) {
+      const threshold = 1 - stopLoss;
+      const f = 0.5; 
+      ror = Math.pow(threshold, (2 / f) - 1);
+      ror = Math.min(1, Math.max(0, ror)); 
+    }
+
+    if (dom.evOutput) {
+      const sign = evPercentage > 0 ? '+' : '';
+      const rootStyles = getComputedStyle(document.documentElement);
+      const colorGreen = rootStyles.getPropertyValue('--theme-accent-green').trim() || '#30D158';
+      const colorRed = rootStyles.getPropertyValue('--theme-accent-red').trim() || '#FF453A';
+      
+      dom.evOutput.style.color = evPercentage > 0 ? colorGreen : (evPercentage < 0 ? colorRed : 'inherit');
+      
+      const evFormatted = evPercentage % 1 === 0 ? evPercentage.toFixed(0) : evPercentage.toFixed(2);
+      dom.evOutput.textContent = `${sign}${evFormatted}%`;
+    }
+
+    dom.fullKellyOutput.textContent = `${(fullKelly * 100).toFixed(2)}%`;
+    dom.fullKellyAmt.textContent = formatCurrency(fullKelly * capital);
+    
+    dom.halfKellyOutput.textContent = `${(halfKelly * 100).toFixed(2)}%`;
+    dom.halfKellyAmt.textContent = formatCurrency(halfKelly * capital);
+    
+    dom.quarterKellyOutput.textContent = `${(quarterKelly * 100).toFixed(2)}%`;
+    dom.quarterKellyAmt.textContent = formatCurrency(quarterKelly * capital);
+
+    dom.rorOutput.textContent = `${(ror * 100).toFixed(2)}%`;
+    
+    if (dom.rorDesc) {
+      dom.rorDesc.innerHTML = `At Half Kelly, the mathematical probability of hitting a <strong>${(stopLoss * 100).toFixed(0)}% drawdown</strong>.`;
+    }
+
+    updateChart(capital, fullKelly, halfKelly, quarterKelly, p, b);
+  }
+
+  function updateChart(startBankroll: number, fFull: number, fHalf: number, fQuarter: number, p: number, b: number) {
+    const events = 100;
+    const labels = Array.from({length: events + 1}, (_, i) => i);
+    
+    const calcGrowth = (f: number) => {
+      if (f <= 0 || startBankroll === 0) return Array(events + 1).fill(startBankroll);
+      const growthFactor = Math.pow(1 + f * b, p) * Math.pow(1 - f, 1 - p);
+      const data = [startBankroll];
+      let current = startBankroll;
+      for (let i = 1; i <= events; i++) {
+        current *= growthFactor;
+        data.push(current);
+      }
+      return data;
+    };
+
+    const dataFull = calcGrowth(fFull);
+    const dataHalf = calcGrowth(fHalf);
+    const dataQuarter = calcGrowth(fQuarter);
+
+    dom.finalFull.textContent = formatCurrency(dataFull[events], true);
+    dom.finalHalf.textContent = formatCurrency(dataHalf[events], true);
+    dom.finalQuarter.textContent = formatCurrency(dataQuarter[events], true);
+
+    const ctx = dom.growthChart as HTMLCanvasElement;
+    if (!ctx) return;
+    
+    if (growthChart) {
+      growthChart.destroy(); 
+    }
+
+    const chartCtx = ctx.getContext('2d');
+    if (!chartCtx) return;
+    
+    const rootStyles = getComputedStyle(document.documentElement);
+    const colorBlue = rootStyles.getPropertyValue('--theme-accent-blue').trim() || '#0A84FF';
+    const colorGreen = rootStyles.getPropertyValue('--theme-accent-green').trim() || '#30D158';
+    const colorGray = rootStyles.getPropertyValue('--theme-text-muted').trim() || '#8E8E93';
+    
+    const createGradient = (hexColor: string) => {
+      if(!hexColor.startsWith('#')) return 'transparent';
+      
+      let r = 0, g = 0, b = 0;
+      if (hexColor.length === 7) {
+        r = parseInt(hexColor.slice(1, 3), 16);
+        g = parseInt(hexColor.slice(3, 5), 16);
+        b = parseInt(hexColor.slice(5, 7), 16);
+      }
+      
+      const gradient = chartCtx.createLinearGradient(0, 0, 0, 360);
+      gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, 0.25)`);
+      gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+      return gradient;
+    };
+    
+    const isMobile = window.innerWidth < 640;
+
+    growthChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Full Kelly',
+            data: dataFull,
+            borderColor: colorBlue,
+            backgroundColor: createGradient(colorBlue),
+            borderWidth: isMobile ? 2 : 3,
+            pointRadius: 0,
+            pointHoverRadius: isMobile ? 4 : 6,
+            pointHoverBackgroundColor: colorBlue,
+            pointHoverBorderColor: '#fff',
+            pointHoverBorderWidth: 2,
+            tension: 0.4,
+            fill: true
+          },
+          {
+            label: 'Half Kelly',
+            data: dataHalf,
+            borderColor: colorGreen,
+            backgroundColor: createGradient(colorGreen),
+            borderWidth: isMobile ? 2 : 3,
+            pointRadius: 0,
+            pointHoverRadius: isMobile ? 4 : 6,
+            pointHoverBackgroundColor: colorGreen,
+            pointHoverBorderColor: '#fff',
+            pointHoverBorderWidth: 2,
+            tension: 0.4,
+            fill: true
+          },
+          {
+            label: 'Quarter Kelly',
+            data: dataQuarter,
+            borderColor: colorGray,
+            backgroundColor: createGradient(colorGray),
+            borderWidth: isMobile ? 2 : 3,
+            pointRadius: 0,
+            pointHoverRadius: isMobile ? 4 : 6,
+            pointHoverBackgroundColor: colorGray,
+            pointHoverBorderColor: '#fff',
+            pointHoverBorderWidth: 2,
+            tension: 0.4,
+            fill: true
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { intersect: false, mode: 'index' },
+        plugins: {
+          legend: { display: false },
+          tooltip: { 
+            backgroundColor: 'rgba(28, 28, 30, 0.9)', 
+            titleColor: '#8E8E93', 
+            bodyColor: '#ffffff',
+            bodyFont: { size: isMobile ? 12 : 14, weight: 'bold' },
+            borderColor: 'rgba(150, 150, 150, 0.2)', 
+            borderWidth: 1, 
+            padding: isMobile ? 10 : 16,
+            cornerRadius: 12,
+            displayColors: true,
+            boxPadding: 4,
+            callbacks: {
+              title: (context) => `Event ${context[0].label}`,
+              label: (context) => ` ${context.dataset.label}: ${formatCurrency(context.parsed.y as number, true)}`
+            }
+          }
+        },
+        scales: {
+          x: { 
+            grid: { display: false }, 
+            border: { display: false },
+            ticks: { 
+              color: '#8E8E93', 
+              font: { size: isMobile ? 10 : 12, weight: 500 },
+              maxTicksLimit: isMobile ? 4 : 5 
+            } 
+          },
+          y: { 
+            grid: { 
+              color: 'rgba(255, 255, 255, 0.05)',
+              drawTicks: false,
+            }, 
+            border: { display: false },
+            ticks: { 
+              color: '#8E8E93', 
+              font: { size: isMobile ? 10 : 12, weight: 500 },
+              padding: isMobile ? 5 : 10,
+              callback: (value) => formatCurrency(value as number, true)
+            } 
+          }
+        }
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initDOM();
+    
+    document.querySelectorAll('.faq-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const faqItem = button.closest('.faq-item');
+        if(!faqItem) return;
+        const isActive = faqItem.classList.contains('active');
+
+        document.querySelectorAll('.faq-item').forEach(item => {
+          item.classList.remove('active');
+          const answer = item.querySelector('.faq-answer') as HTMLElement;
+          const icon = item.querySelector('.faq-vertical-line') as HTMLElement;
+          if(answer) answer.style.gridTemplateRows = '0fr';
+          if(icon) icon.style.transform = 'rotate(90deg)';
+        });
+
+        if (!isActive) {
+          faqItem.classList.add('active');
+          const answer = faqItem.querySelector('.faq-answer') as HTMLElement;
+          const icon = faqItem.querySelector('.faq-vertical-line') as HTMLElement;
+          if(answer) answer.style.gridTemplateRows = '1fr';
+          if(icon) icon.style.transform = 'rotate(0deg)';
+        }
+      });
+    });
+    
+    let inputDebounceTimer: any;
+    const debouncedCalculate = () => {
+      clearTimeout(inputDebounceTimer);
+      inputDebounceTimer = setTimeout(() => { 
+        calculate(); 
+      }, 50);
+    };
+
+    const inputs = ['winProb', 'rewardRisk', 'capital', 'stopLoss'];
+    inputs.forEach(id => {
+      if(dom[id]) dom[id].addEventListener('input', debouncedCalculate);
+    });
+
+    if (dom.calcBtn) {
+      dom.calcBtn.addEventListener('click', () => {
+        calculate(); 
+        
+        if (window.innerWidth < 1280) {
+          const variancePanel = dom.calcBtn.parentElement?.nextElementSibling as HTMLElement;
+          
+          if (variancePanel) {
+            const headerElement = document.querySelector('header');
+            const headerOffset = headerElement ? headerElement.offsetHeight + 16 : 110;
+            
+            const elementPosition = variancePanel.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.scrollY - headerOffset;
+            
+            window.scrollTo({
+                 top: offsetPosition,
+                 behavior: "smooth"
+            });
+          }
+        }
+      });
+    }
+    
+    let resizeTimer: any;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        calculate();
+      }, 250);
+    });
+
+    requestAnimationFrame(() => {
+      calculate();
+    });
+  });
+</script>
+
+<script type="application/ld+json" is:inline>
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "EV Kelly Calculator",
+    "url": "https://evkellycalc.com",
+    "description": "A quantitative finance calculator designed to determine optimal position sizing, track algorithmic trade edges, and calculate Risk of Ruin using the Kelly Criterion.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "WebBrowser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Expected Value Calculation",
+      "Fractional Kelly Sizing (Full, Half, Quarter)",
+      "Risk of Ruin Modeling",
+      "100-Trade Geometric Growth Projection Chart"
+    ]
+  }
+]
+</script>

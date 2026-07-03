@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="500 - System Drawdown | EV Kelly Calculator" 
+  description="An internal server error occurred. Please try again later or reload the application."
+>
+  <div class="max-w-[800px] mx-auto w-full min-h-[75vh] px-4 flex flex-col items-center justify-center text-center opacity-100 transform-none">
+    
+    <div class="w-full p-10 md:p-16 flex flex-col items-center gap-6 rounded-[2rem] bg-[var(--theme-input-bg)] border border-gray-800 shadow-[0_0_50px_rgba(0,0,0,0.5)] backdrop-blur-md relative overflow-hidden">
+      
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-64 bg-[var(--theme-accent-red)] opacity-[0.08] blur-[80px] pointer-events-none"></div>
+
+      <div class="text-[var(--theme-accent-red)] text-8xl md:text-9xl font-black tracking-tighter leading-none relative z-10 drop-shadow-md">
+        500
+      </div>
+      
+      <h1 class="text-3xl sm:text-4xl font-bold text-[var(--theme-text-main)] tracking-tight relative z-10 mt-2">
+        System Drawdown
+      </h1>
+      
+      <p class="text-lg text-gray-300 font-medium max-w-lg leading-relaxed relative z-10 mb-2">
+        We experienced an internal server execution error. Our quantitative systems are working to resolve the issue. Please refresh the page or try again later.
+      </p>
+      
+      <a href="/" class="liquid-btn inline-flex items-center justify-center px-10 py-4 text-lg font-bold tracking-tight relative z-10 mt-2">
+        Reload Application
+      </a>
+
+    </div>
+    
+  </div>
+</Layout>

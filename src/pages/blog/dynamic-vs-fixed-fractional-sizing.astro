@@ -1,0 +1,202 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Dynamic vs. Fixed Fractional Sizing | EV Kelly"
+  description="Why risking a static 1% per trade is mathematically suboptimal, and how to implement dynamic fractional Kelly sizing in your algorithms."
+>
+  <div class="max-w-[1000px] mx-auto w-full min-h-screen px-4 sm:px-8 pt-12 md:pt-20 pb-24">
+    
+    <a href="/blog" class="inline-flex items-center text-[var(--theme-accent-blue)] hover:text-white font-bold tracking-tight mb-8 transition-colors">
+      <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+      Back to Blog Hub
+    </a>
+
+    <header class="flex flex-col items-center text-center mx-auto mb-12 sm:mb-16 opacity-100 transform-none">
+      
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--theme-text-main)] mb-6 leading-tight">
+        Dynamic vs. Fixed Fractional Sizing
+      </h1>
+      
+      <p class="text-lg sm:text-xl text-gray-300 font-medium max-w-3xl leading-relaxed mb-8">
+        Why risking a static 1% per trade is mathematically lazy, and how dynamic position sizing exploits the variance of your algorithmic edge.
+      </p>
+      
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-full bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] flex items-center justify-center text-[var(--theme-accent-blue)] shadow-[0_0_10px_rgba(10,132,255,0.05)] overflow-hidden">
+          <span class="font-bold text-sm">EV</span>
+        </div>
+        <div class="flex flex-col text-left">
+          <span class="text-sm font-bold text-[var(--theme-text-main)]">EV Kelly Engine</span>
+          <span class="text-xs text-[var(--theme-text-muted)]">Published • July 8, 2026 • 11 min read</span>
+        </div>
+      </div>
+      
+    </header>
+
+    <div class="flex flex-col gap-8 sm:gap-12 relative w-full opacity-100 transform-none">
+      
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <p class="text-xl text-[var(--theme-text-main)] font-medium leading-relaxed">
+          The most prevalent myth in retail risk management is the absolute mandate of the "1% Rule." The doctrine states that a trader should never risk more than 1% of their total account equity on any single trade. This is classified as <strong>Fixed Fractional Sizing</strong>.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          To be clear: Fixed Fractional Sizing is not inherently bad. It is a necessary stepping stone. It introduces the concept of anti-martingale scaling—meaning as your account balance grows, your absolute dollar risk scales up, and as you enter a drawdown, your absolute dollar risk scales down, actively defending your capital from ruin. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          However, in the realm of high-performance quantitative architecture, Fixed Fractional Sizing is mathematically bankrupt. It fails because it completely ignores the defining variable of your trading system: the specific Expected Value (EV) of the individual trade being executed. 
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          The Problem with Setup Equality
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          If you program an algorithm to execute two distinct types of mean-reversion setups, those setups will rarely yield the identical probability of success or the identical payoff matrix. 
+        </p>
+        
+        <ul class="flex flex-col gap-4 mt-2">
+          <li class="flex items-start gap-3">
+            <span class="w-2 h-2 rounded-full bg-[var(--theme-accent-red)] flex-shrink-0 mt-2"></span> 
+            <span class="text-gray-300"><strong class="text-white">Setup A (Standard):</strong> Has a historical win rate of 55% and a Reward-to-Risk ratio of 1.2. It presents a solid, positive EV edge.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-2 h-2 rounded-full bg-[var(--theme-accent-green)] flex-shrink-0 mt-2"></span> 
+            <span class="text-gray-300"><strong class="text-white">Setup B (Exceptional):</strong> Occurs rarely, but aligns with multiple higher-timeframe confluences. It carries a historical win rate of 65% and a Reward-to-Risk ratio of 2.0.</span>
+          </li>
+        </ul>
+
+        <p class="text-base text-gray-300 leading-relaxed mt-4">
+          If you utilize a strict Fixed Fractional model, your algorithm will risk exactly 1% on Setup A, and exactly 1% on Setup B. You are effectively restricting the capital allocation on your highest-performing mathematical edge, stunting your geometric compounding curve. This is the equivalent of a professional poker player betting the exact same amount of chips on a pair of twos as they do on a royal flush. It is strategic suicide.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          The Solution: Dynamic Fractional Sizing
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          <strong>Dynamic Fractional Sizing</strong> solves this inefficiency by tying the percentage of capital risked directly to the fluctuating Expected Value of the individual setup. It is primarily driven by the Kelly Criterion. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Instead of hard-coding a static 1% risk limit into your algorithm, you program the engine to calculate the Kelly percentage in real-time based on the specific parameters of the active signal. As the probability or the payoff structure of a trade increases, the algorithm automatically allocates a larger fraction of capital to exploit the variance.
+        </p>
+
+        <div class="overflow-hidden rounded-xl border border-[var(--liquid-input-border)] bg-black/20 my-6">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-[var(--liquid-input-border)] text-gray-400 text-xs sm:text-sm uppercase tracking-wider bg-black/40">
+                <th class="p-4 sm:p-5 font-semibold">Risk Parameter</th>
+                <th class="p-4 sm:p-5 font-semibold">Fixed Fractional Sizing</th>
+                <th class="p-4 sm:p-5 font-semibold">Dynamic Fractional (Kelly)</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm sm:text-base font-mono">
+              <tr class="border-b border-[var(--liquid-input-border)] bg-black/10">
+                <td class="p-4 sm:p-5 font-bold text-white font-sans">Adaptability</td>
+                <td class="p-4 sm:p-5 text-gray-400">None. Always static percentage.</td>
+                <td class="p-4 sm:p-5 text-[var(--theme-accent-green)]">High. Adjusts per individual trade EV.</td>
+              </tr>
+              <tr class="border-b border-[var(--liquid-input-border)]">
+                <td class="p-4 sm:p-5 font-bold text-white font-sans">Compounding Rate</td>
+                <td class="p-4 sm:p-5 text-[var(--theme-accent-red)]">Suboptimal. Suppresses high-EV setups.</td>
+                <td class="p-4 sm:p-5 text-[var(--theme-accent-green)]">Mathematically maximized.</td>
+              </tr>
+              <tr>
+                <td class="p-4 sm:p-5 font-bold text-white font-sans">Complexity</td>
+                <td class="p-4 sm:p-5 text-[var(--theme-accent-green)]">Low. Easy to manual trade.</td>
+                <td class="p-4 sm:p-5 text-gray-400">High. Requires algorithmic execution.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          Executing Dynamic Kelly
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Because the Full Kelly formula will often spit out dangerously high numbers (e.g., risking 18% of your account on a single trade), institutional traders enforce a dynamic cap by operating at <strong>Half Kelly</strong> or <strong>Quarter Kelly</strong>. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Let’s revisit our two setups, but this time, the algorithmic engine is programmed to execute at a strict <strong>Quarter Kelly (0.25x)</strong> fractional output:
+        </p>
+
+        <div class="bg-black/20 border border-[var(--liquid-input-border)] p-6 rounded-xl border-l-4 border-l-[var(--theme-accent-blue)] mt-2">
+          <p class="text-sm text-gray-400 mb-4 font-bold uppercase tracking-wider">Algorithmic Risk Adjustment</p>
+          <ul class="flex flex-col gap-4 text-sm sm:text-base text-gray-300 font-mono">
+            <li>
+              <strong class="text-white font-sans">Setup A (Standard Edge):</strong><br>
+              Full Kelly Output = 17.5% Risk.<br>
+              Quarter Kelly Allocation = <span class="text-[var(--theme-accent-blue)] font-bold">4.37% of Equity</span>
+            </li>
+            <li>
+              <strong class="text-white font-sans">Setup B (Exceptional Edge):</strong><br>
+              Full Kelly Output = 47.5% Risk.<br>
+              Quarter Kelly Allocation = <span class="text-[var(--theme-accent-green)] font-bold">11.87% of Equity</span>
+            </li>
+          </ul>
+        </div>
+
+        <p class="text-base text-gray-300 leading-relaxed mt-4">
+          Notice the aggressive mathematical advantage here. The algorithm is structurally punishing the weaker setup by allocating less capital to it, while simultaneously flooring the accelerator on the exceptional setup. Both allocations remain mathematically safe because they are fractionalized, drastically reducing the variance penalty.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          The Danger of Overfitting Dynamic Risk
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          The only time Dynamic Fractional Sizing will destroy your account is if your estimation of the setup's Win Rate is incorrect. If you classify a trade as an "Exceptional Edge" (Setup B) based on an overfitted, curve-fitted backtest, your dynamic sizing model will heavily over-allocate capital to a phantom edge.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          To combat this, professional developers pair dynamic sizing with an <strong>Absolute Risk Cap</strong>. For example, the algorithm calculates the Quarter Kelly fraction dynamically, but a hard-coded maximum ceiling is placed at 5%. If Kelly calculates an 11% risk allocation, the algorithm truncates it and only executes the 5% cap. This provides the mathematical compounding benefits of dynamic sizing while installing a catastrophic failure safety net.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col items-center text-center gap-6 rounded-[2rem] bg-gradient-to-b from-[var(--theme-accent-blue)]/10 to-transparent border border-white/[0.05] shadow-[0_0_30px_rgba(10,132,255,0.05)]">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight">
+          Stop Guessing Your Sizing
+        </h2>
+        <p class="text-base text-gray-300 max-w-2xl leading-relaxed">
+          A static 1% rule is a relic of manual trading. It is time to let pure mathematical logic dictate your position sizes. Input your multiple setup strategies into our EV engine to calculate the precise fractional Kelly differences between your standard trades and your high-conviction edge.
+        </p>
+        <a href="/" class="liquid-btn inline-flex items-center justify-center px-10 py-4 text-lg font-bold tracking-tight mt-4 border border-white/10 hover:bg-white/5 transition-colors">
+          Open the Calculator Engine
+        </a>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Dynamic vs. Fixed Fractional Sizing",
+  "description": "Why risking a static 1% per trade is mathematically suboptimal, and how to implement dynamic fractional Kelly sizing in your algorithms.",
+  "author": {
+    "@type": "Person",
+    "name": "EV Kelly Engine"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EV Kelly Calculator",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://evkellycalc.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-07-08",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://evkellycalc.com/blog/dynamic-vs-fixed-fractional-sizing"
+  },
+  "wordCount": "1041"
+}
+</script>

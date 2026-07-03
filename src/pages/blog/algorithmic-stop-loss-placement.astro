@@ -1,0 +1,204 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Algorithmic Stop-Loss Placement | EV Kelly"
+  description="How to use ATR and volatility metrics to set mechanical stops that optimize your reward-to-risk ratio."
+>
+  <div class="max-w-[1000px] mx-auto w-full min-h-screen px-4 sm:px-8 pt-12 md:pt-20 pb-24">
+    
+    <a href="/blog" class="inline-flex items-center text-[var(--theme-accent-green)] hover:text-white font-bold tracking-tight mb-8 transition-colors">
+      <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+      Back to Blog Hub
+    </a>
+
+    <header class="flex flex-col items-center text-center mx-auto mb-12 sm:mb-16 opacity-100 transform-none">
+      
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--theme-text-main)] mb-6 leading-tight">
+        Algorithmic Stop-Loss Placement Strategies
+      </h1>
+      
+      <p class="text-lg sm:text-xl text-gray-300 font-medium max-w-3xl leading-relaxed mb-8">
+        How to use Average True Range (ATR) and volatility metrics to set mechanical stops that protect your capital without prematurely killing your edge.
+      </p>
+      
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-full bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] flex items-center justify-center text-[var(--theme-accent-green)] shadow-[0_0_10px_rgba(48,209,88,0.05)] overflow-hidden">
+          <span class="font-bold text-sm">EV</span>
+        </div>
+        <div class="flex flex-col text-left">
+          <span class="text-sm font-bold text-[var(--theme-text-main)]">EV Kelly Engine</span>
+          <span class="text-xs text-[var(--theme-text-muted)]">Published • July 2, 2026 • 10 min read</span>
+        </div>
+      </div>
+      
+    </header>
+
+    <div class="flex flex-col gap-8 sm:gap-12 relative w-full opacity-100 transform-none">
+      
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <p class="text-xl text-[var(--theme-text-main)] font-medium leading-relaxed">
+          The concept of "stop-loss hunting" is one of the most pervasive myths in retail trading. Traders place a stop loss exactly one pip below a major support line, watch the market wick down to hit their stop, and then furiously watch the price reverse in their original direction. They assume institutional market makers are deliberately targeting their account.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          The brutal reality is much simpler: institutional algorithms do not care about your $5,000 retail account. You were not hunted. You simply placed your stop loss in an area of high liquidity using a static, mathematically bankrupt placement strategy. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          A stop loss is not merely a mechanism to prevent an account blowout; it is the mathematical definition of algorithmic invalidation. If your stop loss is triggered by normal, expected market noise before your statistical edge has the time to play out, your trading system is fundamentally flawed. To survive quantitative execution, you must abandon arbitrary price levels and transition to volatility-adjusted mechanical stops.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          The Flaw of Static Percentage Stops
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          The most common advice given to retail traders is to "always use a 1% stop loss" or "always stop out if the asset drops 2%." This is dangerous advice. It completely ignores the underlying state of the market.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Financial markets transition constantly between periods of expansion (high volatility) and contraction (low volatility). If you trade Bitcoin during a period of extreme macroeconomic volatility, a static 2% move can happen in three minutes. If you place a 2% stop loss in that environment, you are practically guaranteeing execution friction will trigger it. Your stop loss is sitting entirely within the radius of normal statistical noise.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Conversely, in a dead, low-volatility forex market, a 2% stop loss might be unnecessarily wide, forcing you to risk too much capital on a setup that invalidated its technical premise hours ago. Your stop loss must breathe with the market. It must dynamically adjust to the current mathematical variance of the asset.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          Enter the Average True Range (ATR)
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Quantitative algorithms rely on the <strong>Average True Range (ATR)</strong> to define market noise. Developed by J. Welles Wilder, the ATR does not predict direction; it strictly measures the historical volatility of an asset over a set period (usually 14 periods). 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          The ATR calculates the true average distance an asset moves per candle, factoring in market gaps and extreme intraday wicks. If the daily ATR of an asset is $5.00, it means the asset typically swings $5.00 from high to low during a single 24-hour period.
+        </p>
+        
+        <div class="bg-black/20 border border-[var(--liquid-input-border)] p-6 rounded-xl border-l-4 border-l-[var(--theme-accent-green)] mt-2">
+          <p class="text-sm text-gray-400 mb-4 font-bold uppercase tracking-wider">The Algorithmic Stop Placement Formula</p>
+          <div class="flex items-center gap-3 text-lg sm:text-xl font-mono text-white mb-4 bg-black/40 p-4 border border-white/5 rounded">
+            <span>Stop Price = Entry Price &plusmn; (ATR &times; Multiplier)</span>
+          </div>
+          <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
+            By tying your stop loss directly to a multiple of the ATR, you mathematically insulate your trade from standard variance. The institutional standard is the <strong>1.5x to 2x ATR Multiplier</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          Executing the Volatility Multiplier
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Let’s apply this mathematically to a long breakout setup. You buy an asset at $100. The current ATR is $2.00. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          If you place a stop loss exactly at $98 (1x ATR), you are placing your stop directly inside the expected daily noise level. A single algorithmic sweep could trigger it before the asset resumes its uptrend. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Instead, you program your algorithm to use a <strong>1.5x ATR multiplier</strong>. 
+          <br>1.5 &times; $2.00 = $3.00. 
+          <br>Your exact mechanical stop is placed at <strong>$97.00</strong>.
+        </p>
+        
+        <ul class="flex flex-col gap-4 mt-2">
+          <li class="flex items-start gap-3">
+            <span class="w-2 h-2 rounded-full bg-[var(--theme-accent-green)] flex-shrink-0 mt-2"></span> 
+            <span class="text-gray-300">If the price drops to $97.00, it means the asset has exceeded its normal statistical variance by 50% in the opposite direction of your trade.</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="w-2 h-2 rounded-full bg-[var(--theme-accent-green)] flex-shrink-0 mt-2"></span> 
+            <span class="text-gray-300">Therefore, the drop is no longer "market noise"—it is a structural trend reversal. Your trade premise is mathematically invalidated, and you accept the loss with zero emotional friction.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          Dynamic Position Sizing: The Kelly Connection
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          There is a psychological barrier to volatility-based stops. If volatility spikes and the ATR widens drastically, your required stop loss will become extremely "wide" in terms of price distance. Retail traders panic when they see a wide stop loss because they equate a wide stop with losing more money.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          This is a fatal misunderstanding of position sizing. <strong>The distance of your stop loss has absolutely nothing to do with how much capital you risk.</strong>
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          When volatility expands and your ATR stop widens, your algorithmic execution model must automatically shrink the lot size. If your Fractional Kelly output dictates that you should risk $500 on this trade, your algorithm recalculates the exact amount of shares/contracts to purchase so that if the wide $97.00 stop is hit, you lose exactly $500. Not a dollar more. 
+        </p>
+        
+        <div class="overflow-hidden rounded-xl border border-[var(--liquid-input-border)] bg-black/20 my-4">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-[var(--liquid-input-border)] text-gray-400 text-xs sm:text-sm uppercase tracking-wider bg-black/40">
+                <th class="p-4 sm:p-5 font-semibold">Market Volatility</th>
+                <th class="p-4 sm:p-5 font-semibold">ATR Stop Distance</th>
+                <th class="p-4 sm:p-5 font-semibold">Calculated Position Size</th>
+                <th class="p-4 sm:p-5 font-semibold text-right">Total Capital Risked</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm sm:text-base font-mono">
+              <tr class="border-b border-[var(--liquid-input-border)] bg-black/10">
+                <td class="p-4 sm:p-5 font-bold text-white font-sans">Low (Tight Range)</td>
+                <td class="p-4 sm:p-5 text-gray-400">1.00%</td>
+                <td class="p-4 sm:p-5 text-[var(--theme-accent-green)]">Large Lot Size</td>
+                <td class="p-4 sm:p-5 font-bold text-white text-right">$500 (Set by Kelly)</td>
+              </tr>
+              <tr class="border-b border-[var(--liquid-input-border)]">
+                <td class="p-4 sm:p-5 font-bold text-white font-sans">High (News Event)</td>
+                <td class="p-4 sm:p-5 text-gray-400">5.00%</td>
+                <td class="p-4 sm:p-5 text-[var(--theme-accent-red)]">Small Lot Size</td>
+                <td class="p-4 sm:p-5 font-bold text-white text-right">$500 (Set by Kelly)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <p class="text-base text-gray-300 leading-relaxed mt-2">
+          This is how institutional traders survive. They do not guess their stops. They measure the noise, place the stop outside the noise parameters, and then force the position size calculation to align with their Kelly risk constraints.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col items-center text-center gap-6 rounded-[2rem] bg-gradient-to-b from-[var(--theme-accent-green)]/10 to-transparent border border-white/[0.05] shadow-[0_0_30px_rgba(48,209,88,0.05)]">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight">
+          Recalibrate Your Reward-to-Risk
+        </h2>
+        <p class="text-base text-gray-300 max-w-2xl leading-relaxed">
+          Dynamic stop losses constantly alter your Reward-to-Risk ratios. A wider stop drastically lowers your R:R, which mathematically alters your edge. You must input your dynamic R:R data back into the Kelly equation to calculate your exact fractional risk. Stop guessing, and start executing.
+        </p>
+        <a href="/" class="liquid-btn inline-flex items-center justify-center px-10 py-4 text-lg font-bold tracking-tight mt-4 border border-white/10 hover:bg-white/5 transition-colors">
+          Open the Calculator Engine
+        </a>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Algorithmic Stop-Loss Placement Strategies",
+  "description": "How to use Average True Range (ATR) and volatility metrics to set mechanical stops that optimize your reward-to-risk ratio.",
+  "author": {
+    "@type": "Person",
+    "name": "EV Kelly Engine"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EV Kelly Calculator",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://evkellycalc.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-07-02",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://evkellycalc.com/blog/algorithmic-stop-loss-placement"
+  },
+  "wordCount": "1036"
+}
+</script>

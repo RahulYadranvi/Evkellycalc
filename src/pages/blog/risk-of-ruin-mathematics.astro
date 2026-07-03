@@ -1,0 +1,185 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout 
+  title="The Mathematics of Risk of Ruin | EV Kelly"
+  description="Understand why high win rates are deceptive, and how consecutive drawdown probability dictates your survival in volatile markets."
+>
+  <div class="max-w-[1000px] mx-auto w-full min-h-screen px-4 sm:px-8 pt-12 md:pt-20 pb-24">
+    
+    <a href="/blog" class="inline-flex items-center text-[var(--theme-accent-red)] hover:text-white font-bold tracking-tight mb-8 transition-colors">
+      <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+      Back to Blog Hub
+    </a>
+
+    <header class="flex flex-col items-center text-center mx-auto mb-12 sm:mb-16 opacity-100 transform-none">
+      
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--theme-text-main)] mb-6 leading-tight">
+        The Mathematics of Risk of Ruin
+      </h1>
+      
+      <p class="text-lg sm:text-xl text-gray-300 font-medium max-w-3xl leading-relaxed mb-8">
+        Understand why high win rates are deceptive, and how consecutive drawdown probability dictates your survival in volatile markets.
+      </p>
+      
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-full bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] flex items-center justify-center text-[var(--theme-accent-red)] shadow-[0_0_10px_rgba(255,69,58,0.05)] overflow-hidden">
+          <span class="font-bold text-sm">EV</span>
+        </div>
+        <div class="flex flex-col text-left">
+          <span class="text-sm font-bold text-[var(--theme-text-main)]">EV Kelly Engine</span>
+          <span class="text-xs text-[var(--theme-text-muted)]">Published • June 20, 2026 • 9 min read</span>
+        </div>
+      </div>
+      
+    </header>
+
+    <div class="flex flex-col gap-8 sm:gap-12 relative w-full opacity-100 transform-none">
+      
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <p class="text-xl text-[var(--theme-text-main)] font-medium leading-relaxed">
+          The most dangerous lie perpetuated in the retail trading industry is that a high win rate guarantees long-term profitability. It does not. You can possess a statistical edge, a brilliant algorithmic entry model, and a 75% win rate, and still mathematically guarantee the total destruction of your capital. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          The mechanism that destroys these accounts is not a lack of edge, but a fundamental misalignment between position sizing and variance. If your capital allocation is not calibrated to withstand the statistical inevitability of losing streaks, your account will eventually hit zero. In quantitative finance, this absolute certainty is measured and defined as the <strong>Risk of Ruin</strong>.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Surviving the markets requires abandoning the illusion of control. You cannot control which specific trades will win or lose. You can only control your mathematical exposure to the sequence of those outcomes.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          What Exactly is Risk of Ruin?
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          <strong>Risk of Ruin (RoR)</strong> is the precise mathematical probability that your trading account will drop to a specific threshold before you achieve your desired profit goals. While "ruin" colloquially means hitting absolute zero, professional quants define ruin as hitting their maximum allowable drawdown—the point at which an algorithm is turned off, or trading capital is depleted beyond the point of realistic mathematical recovery.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Even with a massive statistical edge (a highly positive Expected Value), variance dictates that you will eventually face a severe, localized string of consecutive losses. If your position sizes are too large when that inevitable "tail event" occurs, your capital will be wiped out before the probabilities have the time to revert to their expected mean.
+        </p>
+        
+        <div class="bg-black/20 border border-[var(--liquid-input-border)] p-6 rounded-xl border-l-4 border-l-[var(--theme-accent-red)]">
+          <p class="text-sm text-gray-400 mb-4 font-bold uppercase tracking-wider">The Illusion of the 90% Win Rate</p>
+          <p class="text-sm sm:text-base text-gray-300 leading-relaxed mb-4">
+            Assume you have developed a mean-reversion strategy that wins an astonishing 90% of the time. The probability of losing a single trade is only 10% (0.10). Because the trader feels invincible, they decide to risk 33% of their account per trade.
+          </p>
+          <p class="text-sm sm:text-base text-gray-300 leading-relaxed font-mono text-[var(--theme-accent-red)]">
+            Probability of 3 consecutive losses = 0.10 &times; 0.10 &times; 0.10 = 0.001 (0.1%)
+          </p>
+          <p class="text-sm sm:text-base text-gray-300 leading-relaxed mt-4">
+            While 0.1% sounds small, over a sample size of 1,000 trades, that sequence is mathematically certain to occur. When it does, those three consecutive losses will instantly bankrupt the trader. A 90% win rate is entirely useless if the Risk of Ruin is 100%.
+          </p>
+        </div>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          The Mathematics of Survival
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          In algorithmic risk modeling, Risk of Ruin is commonly calculated using continuous Brownian motion approximations alongside the Kelly Criterion. The fundamental formula states that the probability of hitting a specific drawdown (D) depends entirely on your optimal Kelly fraction (f).
+        </p>
+        
+        <div class="flex justify-center w-full py-8 bg-black/20 rounded-xl border border-[var(--liquid-input-border)] my-4 shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]">
+          <div class="flex items-center gap-3 text-2xl sm:text-4xl font-mono text-white italic">
+            <span>RoR = (1 - D)<sup>(2/f - 1)</sup></span>
+          </div>
+        </div>
+        
+        <p class="text-base text-gray-300 leading-relaxed">
+          This equation reveals a terrifying reality about the standard Kelly Criterion that most retail traders fail to understand: <strong>If you trade Full Kelly (where f = 1), the exponent simplifies to exactly 1. Therefore, your Risk of Ruin is always exactly equal to 1 minus your drawdown threshold.</strong>
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Let’s assume your absolute stop-loss for your entire portfolio is a 20% drawdown. If you size your positions using the Full Kelly output, your probability of eventually hitting that 20% drawdown is 80%. This mathematical truth holds regardless of whether your strategy has a 55% win rate or a 95% win rate. Full Kelly guarantees extreme volatility.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          How Fractional Sizing Saves You
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          To survive variance, institutional algorithms utilize <strong>Fractional Kelly sizing</strong>. By reducing the multiplier <em>f</em> (for example, cutting the Kelly output in half), we force the exponent in the Risk of Ruin equation significantly higher. Because the base number (1 - D) is a decimal, raising it to a higher power collapses the probability exponentially.
+        </p>
+        
+        <div class="overflow-hidden rounded-xl border border-[var(--liquid-input-border)] bg-black/20 my-4">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-[var(--liquid-input-border)] text-gray-400 text-xs sm:text-sm uppercase tracking-wider bg-black/40">
+                <th class="p-4 sm:p-5 font-semibold">Kelly Fraction (f)</th>
+                <th class="p-4 sm:p-5 font-semibold">Math at 20% Stop Loss</th>
+                <th class="p-4 sm:p-5 font-semibold text-right">Risk of Ruin</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm sm:text-base font-mono">
+              <tr class="border-b border-[var(--liquid-input-border)] bg-black/10">
+                <td class="p-4 sm:p-5 font-bold text-[var(--theme-accent-blue)] font-sans">Full Kelly (f=1)</td>
+                <td class="p-4 sm:p-5 text-gray-400">(1 - 0.20)<sup>(2/1 - 1)</sup></td>
+                <td class="p-4 sm:p-5 font-bold text-[var(--theme-accent-red)] text-right">80.00%</td>
+              </tr>
+              <tr class="border-b border-[var(--liquid-input-border)]">
+                <td class="p-4 sm:p-5 font-bold text-[var(--theme-accent-green)] font-sans">Half Kelly (f=0.5)</td>
+                <td class="p-4 sm:p-5 text-gray-400">(1 - 0.20)<sup>(2/0.5 - 1)</sup></td>
+                <td class="p-4 sm:p-5 font-bold text-orange-400 text-right">51.20%</td>
+              </tr>
+              <tr>
+                <td class="p-4 sm:p-5 font-bold text-white font-sans">Quarter Kelly (f=0.25)</td>
+                <td class="p-4 sm:p-5 text-gray-400">(1 - 0.20)<sup>(2/0.25 - 1)</sup></td>
+                <td class="p-4 sm:p-5 font-bold text-[var(--theme-accent-green)] text-right">20.97%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="text-base text-gray-300 leading-relaxed">
+          The table above proves the absolute necessity of fractional sizing. By simply cutting your position size to a Quarter Kelly, you do not linearly reduce your risk; you exponentially crush it. The Risk of hitting a 20% portfolio drawdown falls from a near-certain 80% down to a highly manageable 20.97%. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          This is the secret to quantitative longevity. You must sacrifice the absolute theoretical peak of compounding in exchange for a mathematical guarantee of survival.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col items-center text-center gap-6 rounded-[2rem] bg-gradient-to-b from-[var(--theme-accent-red)]/10 to-transparent border border-white/[0.05] shadow-[0_0_30px_rgba(255,69,58,0.05)]">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight">
+          Visualize Your Risk of Ruin
+        </h2>
+        <p class="text-base text-gray-300 max-w-2xl leading-relaxed">
+          Do not leave your survival to chance or estimation. Input your exact win rate, payoff odds, and maximum drawdown limit into our EV Kelly Calculator to instantly generate your true Risk of Ruin profile.
+        </p>
+        <a href="/" class="liquid-btn inline-flex items-center justify-center px-10 py-4 text-lg font-bold tracking-tight mt-4">
+          Calculate Your Risk
+        </a>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Mathematics of Risk of Ruin",
+  "description": "A deep dive into why high win rates are deceptive, and how consecutive drawdown probability dictates your survival in volatile financial markets.",
+  "author": {
+    "@type": "Person",
+    "name": "Rahul"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EV Kelly Calculator",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://evkellycalc.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-06-20",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://evkellycalc.com/blog/risk-of-ruin-mathematics"
+  },
+  "wordCount": "1018"
+}
+</script>

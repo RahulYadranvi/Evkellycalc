@@ -1,0 +1,316 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Trading Blog & Quantitative Strategies | EV Kelly"
+  description="Read our latest articles on the Kelly Criterion, Expected Value, and institutional risk management strategies."
+>
+  <div class="max-w-[1200px] mx-auto w-full min-h-screen px-4 sm:px-8 md:px-16 pt-12 md:pt-20 pb-10">
+    
+    <header class="flex flex-col items-center text-center mx-auto mb-16">
+      <h1 class="animate-reveal text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--theme-text-main)] mb-6 leading-tight" style="opacity: 0;">
+        Quantitative Trading Blog
+      </h1>
+      <p class="animate-reveal delay-100 text-lg sm:text-xl text-[var(--theme-text-muted)] font-medium max-w-2xl leading-relaxed" style="opacity: 0;">
+        Master the mathematics of position sizing, expected value, and algorithmic risk management.
+      </p>
+    </header>
+
+    <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 w-full mb-8 scroll-mt-24">
+      
+      <a href="/blog/mastering-position-sizing" class="article-card flex opacity-100 translate-y-0 scale-100 liquid-panel static-panel group flex-col p-6 sm:p-8 border border-white/[0.12] hover:border-white/[0.25] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 ease-out">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--theme-accent-blue)] bg-[var(--theme-accent-blue)]/10 rounded-full border border-[var(--theme-accent-blue)]/20">Position Sizing</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">June 2026</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white group-hover:text-[var(--theme-accent-blue)] transition-colors mb-3 leading-tight tracking-tight">
+          Mastering Position Sizing: Why You Need an EV Kelly Calculator
+        </h2>
+        <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed mb-6 flex-1">
+          A mathematical breakdown of Expected Value, the Kelly Criterion, and how fractional capital allocation prevents account ruin.
+        </p>
+        <div class="flex items-center text-sm font-bold text-[var(--theme-accent-blue)] group-hover:translate-x-1 transition-transform">
+          Read Article <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </div>
+      </a>
+
+      <a href="/blog/risk-of-ruin-mathematics" class="article-card flex opacity-100 translate-y-0 scale-100 liquid-panel static-panel group flex-col p-6 sm:p-8 border border-white/[0.12] hover:border-white/[0.25] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 ease-out">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--theme-accent-red)] bg-[var(--theme-accent-red)]/10 rounded-full border border-[var(--theme-accent-red)]/20">Risk Management</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">June 2026</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white group-hover:text-[var(--theme-accent-red)] transition-colors mb-3 leading-tight tracking-tight">
+          The Mathematics of Risk of Ruin
+        </h2>
+        <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed mb-6 flex-1">
+          Why high win rates are deceptive, and how consecutive drawdown probability dictates your survival in volatile markets.
+        </p>
+        <div class="flex items-center text-sm font-bold text-[var(--theme-accent-red)] group-hover:translate-x-1 transition-transform">
+          Read Article <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </div>
+      </a>
+
+      <a href="/blog/building-positive-ev-system" class="article-card flex opacity-100 translate-y-0 scale-100 liquid-panel static-panel group flex-col p-6 sm:p-8 border border-white/[0.12] hover:border-white/[0.25] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 ease-out">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--theme-accent-green)] bg-[var(--theme-accent-green)]/10 rounded-full border border-[var(--theme-accent-green)]/20">Algorithms</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">June 2026</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white group-hover:text-[var(--theme-accent-green)] transition-colors mb-3 leading-tight tracking-tight">
+          Building a Positive EV Trading System
+        </h2>
+        <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed mb-6 flex-1">
+          How to calculate your true reward-to-risk ratio using historical backtesting data, slippage metrics, and execution friction.
+        </p>
+        <div class="flex items-center text-sm font-bold text-[var(--theme-accent-green)] group-hover:translate-x-1 transition-transform">
+          Read Article <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </div>
+      </a>
+
+      <a href="/blog/quarter-kelly-vs-half-kelly" class="article-card flex opacity-100 translate-y-0 scale-100 liquid-panel static-panel group flex-col p-6 sm:p-8 border border-white/[0.12] hover:border-white/[0.25] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 ease-out">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--theme-accent-blue)] bg-[var(--theme-accent-blue)]/10 rounded-full border border-[var(--theme-accent-blue)]/20">Position Sizing</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">June 2026</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white group-hover:text-[var(--theme-accent-blue)] transition-colors mb-3 leading-tight tracking-tight">
+          Quarter Kelly vs. Half Kelly: Which is Better?
+        </h2>
+        <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed mb-6 flex-1">
+          Analyzing the geometric growth curves and variance penalties of different fractional sizing strategies.
+        </p>
+        <div class="flex items-center text-sm font-bold text-[var(--theme-accent-blue)] group-hover:translate-x-1 transition-transform">
+          Read Article <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </div>
+      </a>
+
+      <a href="/blog/psychology-of-drawdowns" class="article-card hidden opacity-0 translate-y-8 scale-95 liquid-panel static-panel group flex-col p-6 sm:p-8 border border-white/[0.12] hover:border-white/[0.25] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 ease-out">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--theme-accent-red)] bg-[var(--theme-accent-red)]/10 rounded-full border border-[var(--theme-accent-red)]/20">Risk Management</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">July 2026</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white group-hover:text-[var(--theme-accent-red)] transition-colors mb-3 leading-tight tracking-tight">
+          The Psychology of Drawdowns: Sticking to the Math
+        </h2>
+        <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed mb-6 flex-1">
+          Why emotional intervention during a mathematical losing streak is the primary cause of algorithmic trading failures.
+        </p>
+        <div class="flex items-center text-sm font-bold text-[var(--theme-accent-red)] group-hover:translate-x-1 transition-transform">
+          Read Article <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </div>
+      </a>
+
+      <a href="/blog/algorithmic-stop-loss-placement" class="article-card hidden opacity-0 translate-y-8 scale-95 liquid-panel static-panel group flex-col p-6 sm:p-8 border border-white/[0.12] hover:border-white/[0.25] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 ease-out">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--theme-accent-green)] bg-[var(--theme-accent-green)]/10 rounded-full border border-[var(--theme-accent-green)]/20">Algorithms</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">July 2026</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white group-hover:text-[var(--theme-accent-green)] transition-colors mb-3 leading-tight tracking-tight">
+          Algorithmic Stop-Loss Placement Strategies
+        </h2>
+        <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed mb-6 flex-1">
+          How to use ATR and volatility metrics to set mechanical stops that optimize your reward-to-risk ratio.
+        </p>
+        <div class="flex items-center text-sm font-bold text-[var(--theme-accent-green)] group-hover:translate-x-1 transition-transform">
+          Read Article <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </div>
+      </a>
+
+      <a href="/blog/geometric-vs-arithmetic-mean" class="article-card hidden opacity-0 translate-y-8 scale-95 liquid-panel static-panel group flex-col p-6 sm:p-8 border border-white/[0.12] hover:border-white/[0.25] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 ease-out">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--theme-accent-blue)] bg-[var(--theme-accent-blue)]/10 rounded-full border border-[var(--theme-accent-blue)]/20">The Mathematics</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">July 2026</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white group-hover:text-[var(--theme-accent-blue)] transition-colors mb-3 leading-tight tracking-tight">
+          Geometric vs. Arithmetic Mean in Portfolio Growth
+        </h2>
+        <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed mb-6 flex-1">
+          Why arithmetic averages lie to you, and why geometric compounding is the only true measure of a strategy's success.
+        </p>
+        <div class="flex items-center text-sm font-bold text-[var(--theme-accent-blue)] group-hover:translate-x-1 transition-transform">
+          Read Article <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </div>
+      </a>
+
+      <a href="/blog/dynamic-vs-fixed-fractional-sizing" class="article-card hidden opacity-0 translate-y-8 scale-95 liquid-panel static-panel group flex-col p-6 sm:p-8 border border-white/[0.12] hover:border-white/[0.25] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 ease-out">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--theme-accent-blue)] bg-[var(--theme-accent-blue)]/10 rounded-full border border-[var(--theme-accent-blue)]/20">Position Sizing</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">July 2026</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white group-hover:text-[var(--theme-accent-blue)] transition-colors mb-3 leading-tight tracking-tight">
+          Dynamic vs. Fixed Fractional Sizing
+        </h2>
+        <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed mb-6 flex-1">
+          Understanding when to recalculate your position sizes to account for changing market volatility and compounding bankrolls.
+        </p>
+        <div class="flex items-center text-sm font-bold text-[var(--theme-accent-blue)] group-hover:translate-x-1 transition-transform">
+          Read Article <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </div>
+      </a>
+
+      <a href="/blog/overfitting-in-backtesting" class="article-card hidden opacity-0 translate-y-8 scale-95 liquid-panel static-panel group flex-col p-6 sm:p-8 border border-white/[0.12] hover:border-white/[0.25] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 ease-out">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--theme-accent-green)] bg-[var(--theme-accent-green)]/10 rounded-full border border-[var(--theme-accent-green)]/20">Algorithms</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">August 2026</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white group-hover:text-[var(--theme-accent-green)] transition-colors mb-3 leading-tight tracking-tight">
+          Overfitting in Backtesting: The Silent Killer
+        </h2>
+        <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed mb-6 flex-1">
+          How curve-fitting your data creates a false Expected Value, guaranteeing failure in live markets.
+        </p>
+        <div class="flex items-center text-sm font-bold text-[var(--theme-accent-green)] group-hover:translate-x-1 transition-transform">
+          Read Article <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </div>
+      </a>
+
+      <a href="/blog/law-of-large-numbers" class="article-card hidden opacity-0 translate-y-8 scale-95 liquid-panel static-panel group flex-col p-6 sm:p-8 border border-white/[0.12] hover:border-white/[0.25] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 ease-out">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--theme-accent-blue)] bg-[var(--theme-accent-blue)]/10 rounded-full border border-[var(--theme-accent-blue)]/20">The Mathematics</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">August 2026</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white group-hover:text-[var(--theme-accent-blue)] transition-colors mb-3 leading-tight tracking-tight">
+          Understanding the Law of Large Numbers
+        </h2>
+        <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed mb-6 flex-1">
+          Why your mathematical edge only materializes over hundreds of trades, and why small sample sizes lead to ruin.
+        </p>
+        <div class="flex items-center text-sm font-bold text-[var(--theme-accent-blue)] group-hover:translate-x-1 transition-transform">
+          Read Article <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </div>
+      </a>
+
+      <a href="/blog/correlation-and-portfolio-variance" class="article-card hidden opacity-0 translate-y-8 scale-95 liquid-panel static-panel group flex-col p-6 sm:p-8 border border-white/[0.12] hover:border-white/[0.25] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 ease-out">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--theme-accent-red)] bg-[var(--theme-accent-red)]/10 rounded-full border border-[var(--theme-accent-red)]/20">Risk Management</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">August 2026</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white group-hover:text-[var(--theme-accent-red)] transition-colors mb-3 leading-tight tracking-tight">
+          Correlation and Portfolio Variance
+        </h2>
+        <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed mb-6 flex-1">
+          Applying the Kelly Criterion across multiple assets. How highly correlated trades multiply your Risk of Ruin.
+        </p>
+        <div class="flex items-center text-sm font-bold text-[var(--theme-accent-red)] group-hover:translate-x-1 transition-transform">
+          Read Article <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </div>
+      </a>
+
+      <a href="/blog/asymmetric-leverage" class="article-card hidden opacity-0 translate-y-8 scale-95 liquid-panel static-panel group flex-col p-6 sm:p-8 border border-white/[0.12] hover:border-white/[0.25] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 ease-out">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--theme-accent-blue)] bg-[var(--theme-accent-blue)]/10 rounded-full border border-[var(--theme-accent-blue)]/20">Position Sizing</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">August 2026</span>
+        </div>
+        <h2 class="text-2xl font-bold text-white group-hover:text-[var(--theme-accent-blue)] transition-colors mb-3 leading-tight tracking-tight">
+          Asymmetric Leverage: Why Losses Hurt More
+        </h2>
+        <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed mb-6 flex-1">
+          The math behind recovery. Why a 50% drawdown requires a 100% gain just to break even, and how proper sizing prevents it.
+        </p>
+        <div class="flex items-center text-sm font-bold text-[var(--theme-accent-blue)] group-hover:translate-x-1 transition-transform">
+          Read Article <svg class="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="flex justify-center items-center gap-4 w-full mt-4">
+      <button id="load-less-btn" style="display: none;" class="liquid-btn px-6 sm:px-10 py-3 sm:py-4 text-sm sm:text-base font-bold tracking-tight text-[var(--theme-text-muted)] border border-white/[0.12] bg-black/40 hover:text-white hover:border-white/30 transition-all duration-300">
+        Load Less
+      </button>
+      <button id="load-more-btn" style="display: inline-flex;" class="liquid-btn px-6 sm:px-10 py-3 sm:py-4 text-sm sm:text-base font-bold tracking-tight text-white border border-white/[0.12] hover:border-white/30 transition-all duration-300">
+        Load More Articles
+      </button>
+    </div>
+
+  </div>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // FIX: Strongly type the NodeList as HTMLElement so TS knows they have style and classList
+    const cards = document.querySelectorAll('.article-card') as NodeListOf<HTMLElement>;
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const loadLessBtn = document.getElementById('load-less-btn');
+    
+    const BATCH_SIZE = 8;
+    let visibleCount = parseInt(sessionStorage.getItem('evKellyBlogVisible') || '4', 10);
+
+    if (isNaN(visibleCount) || visibleCount < 4) visibleCount = 4;
+    if (visibleCount > cards.length) visibleCount = cards.length;
+
+    function renderGrid(isLoadMore = false) {
+      // FIX: Declare type as HTMLElement | null to remove assignment errors
+      let firstNewlyRevealed: HTMLElement | null = null;
+      const targetVisibleCount = visibleCount;
+
+      cards.forEach((card, index) => {
+        if (index < targetVisibleCount) {
+          if (card.classList.contains('hidden')) {
+            card.classList.remove('hidden');
+            card.classList.add('flex');
+            
+            // FIX: Variable is now typed correctly for this assignment
+            if (!firstNewlyRevealed) firstNewlyRevealed = card;
+            
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                card.classList.remove('opacity-0', 'translate-y-8', 'scale-95');
+                card.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+              });
+            });
+          }
+        } else {
+          if (!card.classList.contains('hidden')) {
+            card.classList.remove('opacity-100', 'translate-y-0', 'scale-100');
+            card.classList.add('opacity-0', 'translate-y-8', 'scale-95');
+            
+            window.setTimeout(() => {
+              if (index >= targetVisibleCount) {
+                card.classList.add('hidden');
+                card.classList.remove('flex');
+              }
+            }, 500);
+          }
+        }
+      });
+
+      if (loadMoreBtn) {
+        loadMoreBtn.style.display = targetVisibleCount >= cards.length ? 'none' : 'inline-flex';
+      }
+      
+      if (loadLessBtn) {
+        loadLessBtn.style.display = targetVisibleCount > 4 ? 'inline-flex' : 'none';
+      }
+
+      if (isLoadMore && firstNewlyRevealed) {
+        // FIX: Cast as HTMLElement to guarantee scrollIntoView is available
+        const targetElement = firstNewlyRevealed as HTMLElement;
+        window.setTimeout(() => {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+      } else if (!isLoadMore && loadLessBtn) {
+        const gridTop = document.getElementById('blog-grid');
+        // FIX: Ensure gridTop exists before calling scrollIntoView
+        if (gridTop) gridTop.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      sessionStorage.setItem('evKellyBlogVisible', targetVisibleCount.toString());
+    }
+
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', () => {
+        visibleCount = Math.min(visibleCount + BATCH_SIZE, cards.length);
+        renderGrid(true);
+      });
+    }
+
+    if (loadLessBtn) {
+      loadLessBtn.addEventListener('click', () => {
+        visibleCount = Math.max(visibleCount - BATCH_SIZE, 4);
+        renderGrid(false);
+      });
+    }
+
+    renderGrid(false);
+  });
+</script>

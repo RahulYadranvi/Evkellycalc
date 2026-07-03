@@ -1,0 +1,227 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Mastering Position Sizing | The EV Kelly Strategy"
+  description="A complete, mathematical guide to Expected Value, the Kelly Criterion, and how fractional sizing prevents statistical ruin in financial markets."
+>
+  <div class="max-w-[1000px] mx-auto w-full min-h-screen px-4 sm:px-8 pt-12 md:pt-20 pb-24">
+    
+    <!-- Back to Blog Button -->
+    <a href="/blog" class="inline-flex items-center text-[var(--theme-accent-blue)] hover:text-white font-bold tracking-tight mb-8 transition-colors">
+      <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+      Back to Blog Hub
+    </a>
+
+    <header class="flex flex-col items-center text-center mx-auto mb-12 sm:mb-16 opacity-100 transform-none">
+      
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--theme-text-main)] mb-6 leading-tight">
+        Mastering Position Sizing: Why You Need an EV Kelly Calculator
+      </h1>
+      
+      <p class="text-lg sm:text-xl text-gray-300 font-medium max-w-3xl leading-relaxed mb-8">
+        A mathematical breakdown of Expected Value, the Kelly Criterion, and how fractional capital allocation prevents account ruin in algorithmic trading.
+      </p>
+      
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-full bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] flex items-center justify-center text-[var(--theme-accent-red)] shadow-[0_0_10px_rgba(255,69,58,0.05)] overflow-hidden">
+          <span class="font-bold text-sm">EV</span>
+        </div>
+        <div class="flex flex-col text-left">
+          <span class="text-sm font-bold text-[var(--theme-text-main)]">EV Kelly Engine</span>
+          <span class="text-xs text-[var(--theme-text-muted)]">Published • June 20, 2026 • 8 min read</span>
+        </div>
+      </div>
+      
+    </header>
+
+    <div class="flex flex-col gap-8 sm:gap-12 relative w-full opacity-100 transform-none">
+      
+      <!-- Introduction Section -->
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <p class="text-xl text-[var(--theme-text-main)] font-medium leading-relaxed">
+          The vast majority of retail traders fail. They spend years hunting for the perfect entry signal, tweaking indicators, and backtesting technical algorithms, only to blow up their accounts in a matter of weeks. The reason is rarely a flawed strategy; it is a fundamental ignorance of optimal position sizing.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          In quantitative finance, an entry signal without a position sizing model is not a strategy—it is gambling. If you risk too little, your capital stagnates, eaten alive by inflation and opportunity cost. If you risk too much, inevitable statistical variance will trigger an unrecoverable drawdown. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          The solution lies in bridging the gap between historical probabilities and mathematical capital allocation. You must abandon arbitrary risk parameters (like "always risk 1% per trade") and adopt a dynamic model based on the actual edge of the setup. This is precisely why professional quantitative firms rely on an <strong>EV Kelly Calculator</strong> to dictate their risk models.
+        </p>
+      </div>
+
+      <!-- Step 1: Expected Value -->
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          Step 1: Calculating Expected Value (EV)
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Before you can allocate a single dollar, you must mathematically prove that your system possesses a statistical edge. <strong>Expected Value (EV)</strong> is the average theoretical outcome of a trade if it were executed infinitely under identical conditions. It combines your win probability with your payoff structure to reveal the true value of a setup.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          A high win rate is utterly meaningless if your reward-to-risk ratio is severely skewed. A system that wins 90% of the time but loses 15 times its average win on a single loss possesses a negative expected value. It is mathematically guaranteed to destroy your capital over a large enough sample size.
+        </p>
+        
+        <div class="bg-black/20 border border-[var(--liquid-input-border)] p-6 rounded-xl">
+          <p class="text-sm text-gray-400 mb-4 font-bold uppercase tracking-wider">The EV Formula:</p>
+          <div class="flex items-center justify-center p-4 bg-black/40 rounded border border-white/5 mb-4">
+            <span class="font-mono text-lg text-white">EV = (Win Rate &times; Average Win) - (Loss Rate &times; Average Loss)</span>
+          </div>
+          <ul class="flex flex-col gap-4 text-sm sm:text-base text-gray-300">
+            <li class="flex items-start gap-3">
+              <span class="w-2 h-2 rounded-full bg-[var(--theme-accent-blue)] flex-shrink-0 mt-2"></span> 
+              <span><strong class="text-[var(--theme-text-main)]">Win Rate:</strong> The percentage of your executions that close in profit, proven over a statistically significant sample size (minimum 100+ trades).</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-2 h-2 rounded-full bg-[var(--theme-accent-blue)] flex-shrink-0 mt-2"></span> 
+              <span><strong class="text-[var(--theme-text-main)]">Reward-to-Risk Ratio:</strong> Your average net profit on winning trades divided by your average net loss on losing trades. This must factor in slippage and broker commissions.</span>
+            </li>
+          </ul>
+        </div>
+        <p class="text-base text-gray-300 leading-relaxed">
+          If your EV calculation yields a negative number, stop trading immediately. No bankroll management system, hedging strategy, or recovery martingale can save a negative EV system. You are bleeding capital by definition.
+        </p>
+      </div>
+
+      <!-- Step 2: The Kelly Criterion -->
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          Step 2: Applying the Kelly Criterion
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Once a positive Expected Value is confirmed, the critical question remains: <em>Exactly what fraction of my total account balance should I risk on this specific setup?</em>
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Developed in 1956 by John L. Kelly at Bell Labs, the <strong>Kelly Criterion</strong> is a mathematical formula that determines the optimal theoretical size for a series of bets. It processes your win probability and payoff odds to output a precise percentage. Its sole purpose is to maximize the geometric growth rate of your bankroll over time.
+        </p>
+        
+        <div class="flex justify-center w-full py-8 bg-black/20 rounded-xl border border-[var(--liquid-input-border)] my-2 shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]">
+          <div class="flex items-center gap-3 text-2xl sm:text-3xl font-mono text-white italic">
+            <span>f* =</span>
+            <div class="flex flex-col items-center leading-none">
+              <span class="border-b border-white/40 pb-2 px-4">bp - q</span>
+              <span class="pt-2 px-4">b</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+          <div class="p-4 rounded-lg bg-[rgba(255,255,255,0.02)] border border-[var(--liquid-input-border)]">
+            <span class="text-[var(--theme-accent-blue)] font-mono font-bold mr-2">f*</span> 
+            <span class="text-sm text-gray-300">The fraction of your bankroll to wager.</span>
+          </div>
+          <div class="p-4 rounded-lg bg-[rgba(255,255,255,0.02)] border border-[var(--liquid-input-border)]">
+            <span class="text-[var(--theme-accent-blue)] font-mono font-bold mr-2">b</span> 
+            <span class="text-sm text-gray-300">The odds received (Reward-to-Risk ratio).</span>
+          </div>
+          <div class="p-4 rounded-lg bg-[rgba(255,255,255,0.02)] border border-[var(--liquid-input-border)]">
+            <span class="text-[var(--theme-accent-blue)] font-mono font-bold mr-2">p</span> 
+            <span class="text-sm text-gray-300">The probability of winning (Win Rate).</span>
+          </div>
+          <div class="p-4 rounded-lg bg-[rgba(255,255,255,0.02)] border border-[var(--liquid-input-border)]">
+            <span class="text-[var(--theme-accent-blue)] font-mono font-bold mr-2">q</span> 
+            <span class="text-sm text-gray-300">The probability of losing (1 - p).</span>
+          </div>
+        </div>
+
+        <p class="text-base text-gray-300 leading-relaxed mt-4">
+          The magic of the Kelly formula is that it scales perfectly with your edge. If you find an incredibly asymmetrical trade setup with massive upside and low risk, Kelly will aggressively size you up to capitalize on the inefficiency. If the edge is marginal, Kelly dictates a tiny position size to protect you from variance.
+        </p>
+      </div>
+
+      <!-- Step 3: Drawdowns and Fractional Sizing -->
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          The Danger of "Full Kelly" Sizing
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          While the math behind the Kelly Criterion is flawless, trading the exact output of this formula (Full Kelly) is dangerous for retail traders. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Full Kelly provides the absolute maximum possible compound growth rate. However, to achieve that maximum growth, it pushes your portfolio to the extreme edge of volatility. If you operate at Full Kelly, you are mathematically guaranteed to experience portfolio drawdowns exceeding 50% during normal statistical variance. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          A machine can handle a 50% drawdown because it lacks emotion. A human trader cannot. When a retail trader loses half their capital, they inevitably break their rules. They panic sell, they "revenge trade" with double leverage, or they abandon the strategy entirely right before the variance reverts to the mean.
+        </p>
+        
+        <div class="overflow-hidden rounded-xl border border-[var(--liquid-input-border)] bg-black/20 my-6">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-[var(--liquid-input-border)] text-gray-400 text-xs sm:text-sm uppercase tracking-wider bg-black/40">
+                <th class="p-4 sm:p-5 font-semibold">Sizing Strategy</th>
+                <th class="p-4 sm:p-5 font-semibold">Compounding Power</th>
+                <th class="p-4 sm:p-5 font-semibold">Expected Drawdown</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm sm:text-base">
+              <tr class="border-b border-[var(--liquid-input-border)] bg-black/10">
+                <td class="p-4 sm:p-5 font-bold text-[var(--theme-accent-blue)]">Full Kelly</td>
+                <td class="p-4 sm:p-5 text-[var(--theme-text-main)]">100% (Maximum Growth)</td>
+                <td class="p-4 sm:p-5 text-[var(--theme-accent-red)]">Severe (50%+)</td>
+              </tr>
+              <tr class="border-b border-[var(--liquid-input-border)]">
+                <td class="p-4 sm:p-5 font-bold text-[var(--theme-accent-green)]">Half Kelly</td>
+                <td class="p-4 sm:p-5 text-[var(--theme-text-main)]">~75% of Maximum Growth</td>
+                <td class="p-4 sm:p-5 text-gray-300">Moderate</td>
+              </tr>
+              <tr>
+                <td class="p-4 sm:p-5 font-bold text-white">Quarter Kelly</td>
+                <td class="p-4 sm:p-5 text-[var(--theme-text-main)]">~56% of Maximum Growth</td>
+                <td class="p-4 sm:p-5 text-gray-400">Low (Safest)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="text-base text-gray-300 leading-relaxed">
+          This is why quantitative hedge funds exclusively utilize <strong>Fractional Kelly sizing</strong>. The relationship between risk and reward in the Kelly formula is highly asymmetrical. By cutting the Full Kelly recommendation in half (Half Kelly), you reduce your volatility by 75%, but you still retain 75% of the total compounding power. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Quarter Kelly drops the risk even further, virtually eliminating the Risk of Ruin, making it the institutional standard for protecting capital on unproven algorithms or in highly unpredictable market regimes.
+        </p>
+      </div>
+
+      <!-- Call to Action Section -->
+      <div class="w-full p-8 md:p-12 flex flex-col items-center text-center gap-6 rounded-[2rem] bg-gradient-to-b from-[var(--theme-accent-blue)]/10 to-transparent border border-white/[0.05] shadow-[0_0_30px_rgba(10,132,255,0.05)]">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight">
+          Stop Guessing Your Position Size
+        </h2>
+        <p class="text-base text-gray-300 max-w-2xl leading-relaxed">
+          Do not rely on arbitrary risk percentages or gut feeling. If you want to survive the markets, you must let the mathematics dictate your leverage. Use our institutional-grade engine to instantly calculate your edge, optimize your fractional sizing, and visualize your true Risk of Ruin.
+        </p>
+        <a href="/" class="liquid-btn inline-flex items-center justify-center px-10 py-4 text-lg font-bold tracking-tight mt-4">
+          Open EV Kelly Calculator
+        </a>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Mastering Position Sizing: Why You Need an EV Kelly Calculator",
+  "description": "A comprehensive mathematical breakdown of Expected Value, the Kelly Criterion, and how fractional capital allocation prevents account ruin in algorithmic trading.",
+  "author": {
+    "@type": "Person",
+    "name": "Rahul"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EV Kelly Calculator",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://evkellycalc.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-06-15",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://evkellycalc.com/blog/mastering-position-sizing"
+  },
+  "wordCount": "1054"
+}
+</script>

@@ -1,0 +1,188 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Overfitting in Backtesting: The Silent Killer | EV Kelly"
+  description="Why your 90% win-rate algorithm fails in live markets, and how to identify curve-fitting before it destroys your trading account."
+>
+  <div class="max-w-[1000px] mx-auto w-full min-h-screen px-4 sm:px-8 pt-12 md:pt-20 pb-24">
+    
+    <a href="/blog" class="inline-flex items-center text-[var(--theme-accent-red)] hover:text-white font-bold tracking-tight mb-8 transition-colors">
+      <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+      Back to Blog Hub
+    </a>
+
+    <header class="flex flex-col items-center text-center mx-auto mb-12 sm:mb-16 opacity-100 transform-none">
+      
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--theme-text-main)] mb-6 leading-tight">
+        Overfitting in Backtesting: The Silent Killer
+      </h1>
+      
+      <p class="text-lg sm:text-xl text-gray-300 font-medium max-w-3xl leading-relaxed mb-8">
+        Why your 90% win-rate algorithm fails in live markets, the mathematical fallacy of curve-fitting, and how to properly validate an edge.
+      </p>
+      
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-full bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] flex items-center justify-center text-[var(--theme-accent-red)] shadow-[0_0_10px_rgba(255,69,58,0.05)] overflow-hidden">
+          <span class="font-bold text-sm">EV</span>
+        </div>
+        <div class="flex flex-col text-left">
+          <span class="text-sm font-bold text-[var(--theme-text-main)]">EV Kelly Engine</span>
+          <span class="text-xs text-[var(--theme-text-muted)]">Published • July 11, 2026 • 11 min read</span>
+        </div>
+      </div>
+      
+    </header>
+
+    <div class="flex flex-col gap-8 sm:gap-12 relative w-full opacity-100 transform-none">
+      
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <p class="text-xl text-[var(--theme-text-main)] font-medium leading-relaxed">
+          Every quantitative developer experiences the exact same devastating cycle. You code a new strategy, run it through a historical backtesting engine, and stare in awe at a perfectly smooth, 45-degree equity curve. The backtest shows a 400% return over two years, an 85% win rate, and a microscopic maximum drawdown. You assume you have solved the market. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          You deploy live capital. Within three weeks, the algorithm is bleeding money. The win rate plummets to 35%, the drawdowns exceed historical maximums, and you are forced to turn the system off. You assume the market "regime changed." It didn't. You fell victim to the most dangerous illusion in algorithmic trading: <strong>Overfitting</strong>.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          You are not a genius for creating a backtest that goes up and to the right. Anyone can write a script that makes millions of dollars in the past. Overfitting is the silent killer of trading capital because it convinces you to apply heavy leverage to a mathematical edge that does not actually exist.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          The Anatomy of Curve-Fitting
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Financial markets consist of two components: <strong>Signal</strong> (the underlying macroeconomic or structural edge) and <strong>Noise</strong> (random, unpredictable price variance). A robust algorithm identifies the signal and ignores the noise. An overfitted algorithm memorizes the noise.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Curve-fitting happens when a developer looks at a series of historical losses and adds hyper-specific parameters to filter them out. 
+        </p>
+        
+        <div class="bg-black/20 border border-[var(--liquid-input-border)] p-6 rounded-xl border-l-4 border-l-[var(--theme-accent-red)] mt-2">
+          <p class="text-sm text-gray-400 mb-4 font-bold uppercase tracking-wider">The Parameter Trap</p>
+          <ul class="flex flex-col gap-3 text-sm sm:text-base text-gray-300 leading-relaxed">
+            <li><strong>Iteration 1:</strong> Buy when 50 EMA crosses 200 EMA. <em>(Result: 45% Win Rate. Too many false signals.)</em></li>
+            <li><strong>Iteration 2:</strong> Add rule: Only buy if RSI is above 50. <em>(Result: 55% Win Rate. Better, but still volatile.)</em></li>
+            <li><strong>Iteration 3:</strong> Add rule: Only buy between 09:30 AM and 11:00 AM on Tuesdays and Thursdays. <em>(Result: 85% Win Rate. Holy Grail achieved.)</em></li>
+          </ul>
+        </div>
+
+        <p class="text-base text-gray-300 leading-relaxed mt-4">
+          By Iteration 3, you have completely destroyed the integrity of the algorithm. You have restricted the execution parameters so tightly that the code is simply memorizing specific historical anomalies. The market will never replicate that exact sequence of noise again. When deployed live, the overfitted rules will filter out valid signals and execute on random variance, leading to immediate system decay.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          Degrees of Freedom
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          In statistics, a system's robustness is defined by its <strong>Degrees of Freedom</strong>. This represents the amount of data points you have relative to the number of rules or parameters in your system.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Every time you add an indicator, a time-filter, or a specific take-profit percentage to your algorithm, you consume a degree of freedom. To maintain mathematical validity, a highly complex system requires a massive, multi-year dataset with thousands of executions. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          A simple trend-following system with two moving averages tested over 5,000 trades is structurally robust. A complex mean-reversion algorithm with six custom indicators tested over 100 trades is mathematical garbage. The fewer parameters your system relies on, the higher the probability it will survive out-of-sample data.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          The Illusion of In-Sample Testing
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          The cardinal sin of retail algorithmic development is testing a strategy on the exact same dataset used to build it. If you build a strategy using Bitcoin data from 2020 to 2022, and then run your final backtest on that exact same 2020 to 2022 timeline, the results are entirely invalid. This is called <strong>In-Sample Testing</strong>.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          To prove an edge exists, you must utilize <strong>Out-of-Sample (OOS) Data</strong>.
+        </p>
+
+        <div class="overflow-hidden rounded-xl border border-[var(--liquid-input-border)] bg-black/20 my-4">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-[var(--liquid-input-border)] text-gray-400 text-xs sm:text-sm uppercase tracking-wider bg-black/40">
+                <th class="p-4 sm:p-5 font-semibold">Testing Phase</th>
+                <th class="p-4 sm:p-5 font-semibold">Dataset Used</th>
+                <th class="p-4 sm:p-5 font-semibold">Purpose</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm sm:text-base font-mono">
+              <tr class="border-b border-[var(--liquid-input-border)] bg-black/10">
+                <td class="p-4 sm:p-5 font-bold text-white font-sans">In-Sample (Training)</td>
+                <td class="p-4 sm:p-5 text-gray-400">Data from 2018 - 2021</td>
+                <td class="p-4 sm:p-5 text-gray-400">Optimize parameters, define the core logic, and build the rule set.</td>
+              </tr>
+              <tr class="border-b border-[var(--liquid-input-border)]">
+                <td class="p-4 sm:p-5 font-bold text-white font-sans">Out-of-Sample (Testing)</td>
+                <td class="p-4 sm:p-5 text-[var(--theme-accent-blue)]">Data from 2022 - 2024</td>
+                <td class="p-4 sm:p-5 text-[var(--theme-accent-blue)]">Blindly verify the logic on unseen data. No parameter changes allowed.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <p class="text-base text-gray-300 leading-relaxed mt-2">
+          If your algorithm prints a 2.0 Profit Factor on the In-Sample data, but immediately drops to a 0.8 Profit Factor on the Out-of-Sample data, you do not have an edge. You have an overfitted curve. Delete the code and start over.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          How Overfitting Destroys the Kelly Criterion
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Position sizing mathematics requires absolute honesty. The Kelly Criterion is a highly aggressive formula. It assumes the numbers you feed into it—your Win Rate and your Reward-to-Risk ratio—are undeniable, mathematical facts.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          If you feed an overfitted Win Rate into a Kelly calculator, it will instruct you to take on massive leverage. Let's say your curve-fitted backtest claims you have a 70% win rate with a 1.5 R:R. The Kelly formula will tell you to risk a staggering 50% of your account per trade. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          When you take that system into the live market and it reverts to its true, non-fitted win rate of 40%, you are still risking 50% of your portfolio per trade. You will suffer a 100% Risk of Ruin event in less than five trades. This is why institutional quants apply heavy discounts to their backtested metrics before calculating their risk fraction.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col items-center text-center gap-6 rounded-[2rem] bg-gradient-to-b from-[var(--theme-accent-red)]/10 to-transparent border border-white/[0.05] shadow-[0_0_30px_rgba(255,69,58,0.05)]">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight">
+          Verify Before You Size
+        </h2>
+        <p class="text-base text-gray-300 max-w-2xl leading-relaxed">
+          Never trust your in-sample data. Discount your backtested edge, calculate your realistic out-of-sample metrics, and use fractional constraints to protect against estimation error. Input your verified, stress-tested metrics into our engine to calculate a mathematically survivable position size.
+        </p>
+        <a href="/" class="liquid-btn inline-flex items-center justify-center px-10 py-4 text-lg font-bold tracking-tight mt-4 border border-white/10 hover:bg-white/5 transition-colors">
+          Open the Calculator Engine
+        </a>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Overfitting in Backtesting: The Silent Killer",
+  "description": "Why your 90% win-rate algorithm fails in live markets, the mathematical fallacy of curve-fitting, and how to properly validate an edge.",
+  "author": {
+    "@type": "Person",
+    "name": "EV Kelly Engine"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EV Kelly Calculator",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://evkellycalc.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-07-11",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://evkellycalc.com/blog/overfitting-in-backtesting"
+  },
+  "wordCount": "1065"
+}
+</script>

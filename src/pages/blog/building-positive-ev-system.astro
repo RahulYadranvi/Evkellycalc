@@ -1,0 +1,183 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Building a Positive EV Trading System | EV Kelly"
+  description="Learn how to calculate your true reward-to-risk ratio using historical backtesting data, slippage metrics, and execution friction."
+>
+  <div class="max-w-[1000px] mx-auto w-full min-h-screen px-4 sm:px-8 pt-12 md:pt-20 pb-24">
+    
+    <a href="/blog" class="inline-flex items-center text-[var(--theme-accent-green)] hover:text-white font-bold tracking-tight mb-8 transition-colors">
+      <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+      Back to Blog Hub
+    </a>
+
+    <header class="flex flex-col items-center text-center mx-auto mb-12 sm:mb-16 opacity-100 transform-none">
+      
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--theme-text-main)] mb-6 leading-tight">
+        Building a Positive EV Trading System
+      </h1>
+      
+      <p class="text-lg sm:text-xl text-gray-300 font-medium max-w-3xl leading-relaxed mb-8">
+        How to calculate your true reward-to-risk ratio using historical backtesting data, slippage metrics, and execution friction to guarantee a mathematical edge.
+      </p>
+      
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-full bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] flex items-center justify-center text-[var(--theme-accent-green)] shadow-[0_0_10px_rgba(48,209,88,0.05)] overflow-hidden">
+          <span class="font-bold text-sm">EV</span>
+        </div>
+        <div class="flex flex-col text-left">
+          <span class="text-sm font-bold text-[var(--theme-text-main)]">EV Kelly Engine</span>
+          <span class="text-xs text-[var(--theme-text-muted)]">Published • June 22, 2026 • 9 min read</span>
+        </div>
+      </div>
+      
+    </header>
+
+    <div class="flex flex-col gap-8 sm:gap-12 relative w-full opacity-100 transform-none">
+      
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <p class="text-xl text-[var(--theme-text-main)] font-medium leading-relaxed">
+          The retail trading industry is obsessed with entries. Traders spend thousands of hours staring at charts, analyzing candlestick patterns, and combining arbitrary indicators to find the "perfect" setup. This is a fundamental waste of time. In quantitative finance, the entry is merely the mechanism to execute an edge. The edge itself is defined by one metric and one metric only: <strong>Expected Value (EV).</strong>
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          If you are trading a system with a negative Expected Value, no amount of discipline, chart time, or psychological fortitude will save you. You are playing a rigged game against the house. Your capital will slowly bleed out until you hit a Risk of Ruin event. Building a profitable algorithmic or discretionary system requires stripping away the emotion and ruthlessly calculating the baseline mathematics of your execution model.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          The Foundation: Gross Expected Value
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Expected Value is the mathematical representation of what a specific trade setup will yield over an infinite number of executions. It balances your historical probability of winning against the asymmetry of your payoff. A system does not need a high win rate to be immensely profitable; it simply needs a positive Expected Value.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          The baseline calculation for Gross Expected Value is straightforward:
+        </p>
+        
+        <div class="flex justify-center w-full py-6 bg-black/20 rounded-xl border border-[var(--liquid-input-border)] my-4 shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]">
+          <div class="flex flex-col sm:flex-row items-center gap-3 text-lg sm:text-2xl font-mono text-white text-center">
+            <span>EV = (Win % &times; Avg Win) - (Loss % &times; Avg Loss)</span>
+          </div>
+        </div>
+        
+        <p class="text-base text-gray-300 leading-relaxed">
+          Consider a trend-following system. It only wins 35% of the time, meaning it loses 65% of all trades taken. Most retail traders would abandon this system immediately, assuming it is broken. However, because the system cuts losses instantly and lets winners run aggressively, the Average Win is $400, while the Average Loss is only $100.
+        </p>
+        
+        <div class="bg-black/20 border border-[var(--liquid-input-border)] p-6 rounded-xl border-l-4 border-l-[var(--theme-accent-green)] mt-2">
+          <p class="text-sm sm:text-base text-gray-300 font-mono leading-relaxed">
+            <span class="text-white font-bold">Winning Side:</span> 0.35 &times; $400 = +$140<br>
+            <span class="text-[var(--theme-accent-red)] font-bold">Losing Side:</span> 0.65 &times; $100 = -$65<br>
+            <span class="text-[var(--theme-accent-green)] font-bold mt-2 block">Gross EV: $140 - $65 = +$75 per trade</span>
+          </p>
+        </div>
+        <p class="text-base text-gray-300 leading-relaxed mt-4">
+          Despite losing almost twice as often as it wins, every time this algorithm executes a trade, it theoretically prints $75. This is the definition of a positive EV system. 
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          The Illusion of Backtesting: Execution Friction
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          The calculation above is where amateur system developers stop. They look at the Gross EV from a TradingView backtest, assume they are going to be millionaires, and turn on the live execution. Within a month, the system is losing money. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Why does a positive EV system fail in live markets? Because backtests are frictionless environments. They assume that you get filled at the exact price you requested, with zero delay, and zero cost. The reality of live quantitative execution is defined by <strong>Friction</strong>. If you do not calculate friction into your model, your EV is a lie.
+        </p>
+
+        <ul class="flex flex-col gap-6 mt-4">
+          <li class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold text-white">1. Slippage</h3>
+            <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
+              When a breakout occurs, momentum spikes. If your algorithm fires a market order to buy, you are competing with high-frequency algorithms and institutional flow. By the time your order reaches the exchange, the price has moved. You get filled worse than expected. This difference between your theoretical entry price and your actual execution price is slippage, and it permanently degrades your Average Win size.
+            </p>
+          </li>
+          <li class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold text-white">2. Spread</h3>
+            <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
+              The difference between the Bid and the Ask price is a mandatory tax on every single trade you take. If you are trading illiquid altcoins, small-cap stocks, or exotic forex pairs, the spread can represent a massive percentage of your overall risk profile. You are instantly in a negative position the millisecond your trade executes.
+            </p>
+          </li>
+          <li class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold text-white">3. Broker Commissions and Funding Rates</h3>
+            <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
+              If you are utilizing leverage via perpetual futures or CFD contracts, you are paying funding rates and execution fees. High-frequency scalping systems often boast massive win rates and positive Gross EVs, but when broker commissions are subtracted from the hundreds of daily trades, the Net EV instantly turns negative. You are effectively working for your broker.
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          Calculating True Net Expected Value
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          To build a robust quantitative model, you must subtract all execution friction from your historical data before calculating your edge. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          <strong>Net EV = Gross EV - (Average Slippage + Average Spread + Commissions)</strong>
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          If your system yields a Gross EV of $15 per trade, but your average slippage, spread, and commission costs total $18 per trade, your system is mathematically broken. This is why low-timeframe scalping is incredibly difficult to sustain algorithmically; the profit margins are so thin that standard execution friction entirely consumes the statistical edge. High-timeframe swing trading systems are generally far more robust because the Average Win is large enough to absorb the friction without destroying the Net EV.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          Bridging the Gap to the Kelly Criterion
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Once you have gathered statistically significant out-of-sample data (a minimum of 100 live or forward-tested executions) and calculated a positive Net EV, the system development phase is over. You have an edge. The final, crucial step is determining how to exploit that edge without ruining your account through variance.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          This is where the Kelly formula dictates execution. By feeding your proven, friction-adjusted Win Rate and Reward-to-Risk ratio into the Kelly Criterion, the math will output the exact percentage of your bankroll you should risk on the next setup. If the EV of a specific setup drops, Kelly will automatically reduce your position size, defending your capital.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col items-center text-center gap-6 rounded-[2rem] bg-gradient-to-b from-[var(--theme-accent-green)]/10 to-transparent border border-white/[0.05] shadow-[0_0_30px_rgba(48,209,88,0.05)]">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight">
+          Input Your Edge
+        </h2>
+        <p class="text-base text-gray-300 max-w-2xl leading-relaxed">
+          Do not assume your edge; mathematically verify it. Take your friction-adjusted win rate and payoff odds, and input them directly into the engine to calculate your optimal fractional position size.
+        </p>
+        <a href="/" class="liquid-btn inline-flex items-center justify-center px-10 py-4 text-lg font-bold tracking-tight mt-4 border border-white/10 hover:bg-white/5 transition-colors">
+          Open the Calculator Engine
+        </a>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Building a Positive EV Trading System",
+  "description": "How to calculate your true reward-to-risk ratio using historical backtesting data, slippage metrics, and execution friction to guarantee a mathematical edge.",
+  "author": {
+    "@type": "Person",
+    "name": "EV Kelly Engine"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EV Kelly Calculator",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://evkellycalc.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-06-22",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://evkellycalc.com/blog/building-positive-ev-system"
+  },
+  "wordCount": "1062"
+}
+</script>

@@ -1,0 +1,161 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout 
+  title="The Psychology of Drawdowns | EV Kelly"
+  description="Why emotional intervention during a mathematical losing streak is the primary cause of algorithmic trading failures."
+>
+  <div class="max-w-[1000px] mx-auto w-full min-h-screen px-4 sm:px-8 pt-12 md:pt-20 pb-24">
+    
+    <a href="/blog" class="inline-flex items-center text-[var(--theme-accent-red)] hover:text-white font-bold tracking-tight mb-8 transition-colors">
+      <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+      Back to Blog Hub
+    </a>
+
+    <header class="flex flex-col items-center text-center mx-auto mb-12 sm:mb-16 opacity-100 transform-none">
+      
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--theme-text-main)] mb-6 leading-tight">
+        The Psychology of Drawdowns: Sticking to the Math
+      </h1>
+      
+      <p class="text-lg sm:text-xl text-gray-300 font-medium max-w-3xl leading-relaxed mb-8">
+        Why emotional intervention during a mathematical losing streak is the primary cause of system failures, and how to insulate your mind from variance.
+      </p>
+      
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-full bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] flex items-center justify-center text-[var(--theme-accent-red)] shadow-[0_0_10px_rgba(255,69,58,0.05)] overflow-hidden">
+          <span class="font-bold text-sm">EV</span>
+        </div>
+        <div class="flex flex-col text-left">
+          <span class="text-sm font-bold text-[var(--theme-text-main)]">EV Kelly Engine</span>
+          <span class="text-xs text-[var(--theme-text-muted)]">Published • June 28, 2026 • 9 min read</span>
+        </div>
+      </div>
+      
+    </header>
+
+    <div class="flex flex-col gap-8 sm:gap-12 relative w-full opacity-100 transform-none">
+      
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <p class="text-xl text-[var(--theme-text-main)] font-medium leading-relaxed">
+          The true test of an algorithmic or quantitative trading system does not happen when it is printing money during a macro trend. It happens when the system enters a drawdown. Drawdowns are not an anomaly; they are a mathematical certainty. If your strategy has a 60% win rate, variance dictates that you will eventually face a sequence of consecutive losses that tests your capital constraints—and your psychological sanity.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          In quantitative development, we design systems using raw mathematical equations, assuming a frictionless execution environment. But when live capital is on the line and your equity curve drops 15% over a two-week period, your brain stops thinking like a data scientist. It shifts instantly into survival mode. This emotional hijacking is the single greatest killer of trading edges.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          The Cognitive Biases of Variance
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Human evolution is optimized for linear patterns and immediate survival. Unfortunately, financial markets operate on geometric compounding and probability distributions. This disconnect triggers predictable psychological traps during an equity drawdown:
+        </p>
+
+        <ul class="flex flex-col gap-6 mt-2">
+          <li class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold text-white">1. Recency Bias</h3>
+            <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
+              When an algorithm is in a localized 5-trade losing streak, recency bias forces you to over-weight those five recent outcomes while ignoring the 500-trade backtest that proves the system's longevity. You convince yourself that "the market has permanently changed" or "the edge is dead," causing you to manually alter the code at the absolute worst historical time.
+            </p>
+          </li>
+          <li class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold text-white">2. Loss Aversion</h3>
+            <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
+              Behavioral economics proves that the psychological pain of a financial loss is structurally twice as powerful as the pleasure of an equivalent gain. When your account equity dips, loss aversion tempts you to skip the next valid entry signal to avoid "further pain," completely breaking the law of large numbers and preventing the strategy from entering the recovery curve.
+            </p>
+          </li>
+          <li class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold text-white">3. Revenge Trading (Gambler's Fallacy)</h3>
+            <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
+              Conversely, some traders fall victim to assuming that because they have lost four times in a row, the fifth trade is "due" to win. They manually double their position size, overriding the Kelly Criterion, only to hit a localized tail-event that results in severe capital depletion.
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          The Mathematical Anatomy of a Losing Streak
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          To neutralize these cognitive biases, you must look at a losing streak as a structural feature of your system, not a flaw. Let's look at the math behind a high-performing strategy that wins 55% of its trades.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Over a sample of 100 trades, the probability of facing 6 consecutive losses at some point during that run is roughly <strong>86%</strong>. For a sample of 500 trades, hitting 8 consecutive losses jumps to over <strong>90%</strong> certainty. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          If your system hits 7 losses in a row, it doesn't mean your code is broken. It means your code is operating exactly within standard probability parameters. If you intervene and shut down the model or decrease your risk below what your Kelly calculator dictates, you are effectively locking in the drawdown and deleting your capacity to compound out of it.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          Insulating Execution From Emotion
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Professional quantitative firms spend millions of dollars ensuring that human emotion is fully isolated from trade execution. If you want to survive as a independent quantitative developer, you must establish an identical psychological firewall:
+        </p>
+        
+        <div class="bg-black/20 border border-[var(--liquid-input-border)] p-6 rounded-xl border-l-4 border-l-[var(--theme-accent-red)]">
+          <ul class="flex flex-col gap-4 text-sm sm:text-base text-gray-300">
+            <li class="flex items-start gap-3">
+              <span class="w-2 h-2 rounded-full bg-[var(--theme-accent-red)] flex-shrink-0 mt-2"></span> 
+              <span><strong class="text-[var(--theme-text-main)]">Automate Capital Allocation:</strong> Let a fractional Kelly script calculate your position sizing dynamically. Never guess or manually input your lot size based on "how confident" you feel about a setup.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-2 h-2 rounded-full bg-[var(--theme-accent-red)] flex-shrink-0 mt-2"></span> 
+              <span><strong class="text-[var(--theme-text-main)]">Stop Monitoring PnL in Real-Time:</strong> Watching account values fluctuate second-by-second triggers dopamine spikes and panic. Monitor performance across batches of 100 trades, not individual ticks.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-2 h-2 rounded-full bg-[var(--theme-accent-red)] flex-shrink-0 mt-2"></span> 
+              <span><strong class="text-[var(--theme-text-main)]">Establish Hard Kill-Switches:</strong> Define your absolute invalidation threshold before you turn a system on. If a system is designed to handle an expected 25% drawdown, you do not touch it until it hits exactly 25.01%. Emotional adjustments made at 15% are simply undisciplined mistakes.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col items-center text-center gap-6 rounded-[2rem] bg-gradient-to-b from-[var(--theme-accent-red)]/10 to-transparent border border-white/[0.05] shadow-[0_0_30px_rgba(255,69,58,0.05)]">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight">
+          Trust the Math. Outlast Variance.
+        </h2>
+        <p class="text-base text-gray-300 max-w-2xl leading-relaxed">
+          Remove human bias entirely from your execution layers. Input your historical trading statistics into our browser-based engine, map out your maximum variance tolerances, and let cold, objective probability dictate your path out of the drawdown.
+        </p>
+        <a href="/" class="liquid-btn inline-flex items-center justify-center px-10 py-4 text-lg font-bold tracking-tight mt-4 border border-white/10 hover:bg-white/5 transition-colors">
+          Open the Calculator Engine
+        </a>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Psychology of Drawdowns: Sticking to the Math",
+  "description": "Why emotional intervention during a mathematical losing streak is the primary cause of algorithmic trading failures.",
+  "author": {
+    "@type": "Person",
+    "name": "EV Kelly Engine"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EV Kelly Calculator",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://evkellycalc.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-06-28",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://evkellycalc.com/blog/psychology-of-drawdowns"
+  },
+  "wordCount": "1041"
+}
+</script>

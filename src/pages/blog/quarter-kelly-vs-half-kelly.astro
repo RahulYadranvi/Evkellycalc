@@ -1,0 +1,188 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Quarter Kelly vs. Half Kelly: Which is Better? | EV Kelly"
+  description="A deep mathematical analysis of the geometric growth curves and variance penalties between Quarter Kelly and Half Kelly position sizing."
+>
+  <div class="max-w-[1000px] mx-auto w-full min-h-screen px-4 sm:px-8 pt-12 md:pt-20 pb-24">
+    
+    <a href="/blog" class="inline-flex items-center text-[var(--theme-accent-blue)] hover:text-white font-bold tracking-tight mb-8 transition-colors">
+      <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+      Back to Blog Hub
+    </a>
+
+    <header class="flex flex-col items-center text-center mx-auto mb-12 sm:mb-16 opacity-100 transform-none">
+      
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--theme-text-main)] mb-6 leading-tight">
+        Quarter Kelly vs. Half Kelly: Which is Better?
+      </h1>
+      
+      <p class="text-lg sm:text-xl text-gray-300 font-medium max-w-3xl leading-relaxed mb-8">
+        Analyzing the geometric growth curves, estimation errors, and variance penalties to determine the optimal fractional sizing strategy for your algorithm.
+      </p>
+      
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-full bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] flex items-center justify-center text-[var(--theme-accent-blue)] shadow-[0_0_10px_rgba(10,132,255,0.05)] overflow-hidden">
+          <span class="font-bold text-sm">EV</span>
+        </div>
+        <div class="flex flex-col text-left">
+          <span class="text-sm font-bold text-[var(--theme-text-main)]">EV Kelly Engine</span>
+          <span class="text-xs text-[var(--theme-text-muted)]">Published • June 25, 2026 • 10 min read</span>
+        </div>
+      </div>
+      
+    </header>
+
+    <div class="flex flex-col gap-8 sm:gap-12 relative w-full opacity-100 transform-none">
+      
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <p class="text-xl text-[var(--theme-text-main)] font-medium leading-relaxed">
+          The Full Kelly Criterion offers a mathematical absolute: it provides the maximum possible compound growth rate for a series of bets with a known edge. If you risk more than Full Kelly, you enter the zone of negative asymmetry—you assume more risk for less reward, mathematically guaranteeing eventual ruin. If you risk exactly Full Kelly, you maximize your geometric growth.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          So why does virtually every successful quantitative hedge fund on the planet refuse to trade Full Kelly?
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Because the cost of maximum theoretical growth is maximum practical volatility. A Full Kelly algorithm operates at the absolute edge of disaster. It is mathematically normal for a Full Kelly system to experience drawdowns exceeding 50%, and in severe variance events, drawdowns of 90%. To survive the reality of live markets, you must sacrifice the peak of the growth curve for stability. This is the realm of Fractional Kelly, where the debate between Quarter Kelly and Half Kelly dominates risk architecture.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          The Asymmetry of the Kelly Curve
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          To understand fractional sizing, you must first understand the shape of the Kelly curve. The relationship between risk and compound growth is not linear; it is a parabola. This parabolic nature creates a massive mathematical advantage for fractional sizing.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          When you cut your risk in half, you do not cut your profits in half. The peak of the curve is relatively flat, meaning you can dramatically reduce your exposure while capturing the vast majority of the theoretical growth.
+        </p>
+        
+        <div class="overflow-hidden rounded-xl border border-[var(--liquid-input-border)] bg-black/20 my-6">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-[var(--liquid-input-border)] text-gray-400 text-xs sm:text-sm uppercase tracking-wider bg-black/40">
+                <th class="p-4 sm:p-5 font-semibold">Sizing Strategy</th>
+                <th class="p-4 sm:p-5 font-semibold">Risk Level</th>
+                <th class="p-4 sm:p-5 font-semibold text-right">Compound Growth Captured</th>
+              </tr>
+            </thead>
+            <tbody class="text-sm sm:text-base font-mono">
+              <tr class="border-b border-[var(--liquid-input-border)] bg-black/10">
+                <td class="p-4 sm:p-5 font-bold text-white font-sans">Full Kelly</td>
+                <td class="p-4 sm:p-5 text-[var(--theme-accent-red)]">100% Risk</td>
+                <td class="p-4 sm:p-5 font-bold text-[var(--theme-accent-green)] text-right">100.0%</td>
+              </tr>
+              <tr class="border-b border-[var(--liquid-input-border)]">
+                <td class="p-4 sm:p-5 font-bold text-white font-sans">Half Kelly</td>
+                <td class="p-4 sm:p-5 text-orange-400">50% Risk</td>
+                <td class="p-4 sm:p-5 font-bold text-[var(--theme-accent-green)] text-right">75.0%</td>
+              </tr>
+              <tr>
+                <td class="p-4 sm:p-5 font-bold text-white font-sans">Quarter Kelly</td>
+                <td class="p-4 sm:p-5 text-[var(--theme-accent-blue)]">25% Risk</td>
+                <td class="p-4 sm:p-5 font-bold text-[var(--theme-accent-green)] text-right">56.2%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="text-base text-gray-300 leading-relaxed">
+          Look closely at the math above. By utilizing Half Kelly, you slash your portfolio volatility and your Risk of Ruin by 50%, yet you still capture 75% of the absolute maximum possible growth rate. This is arguably the closest thing to a "free lunch" in quantitative finance.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          The Case for Half Kelly: The Institutional Standard
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Half Kelly is the default operating standard for most established quantitative algorithms. It provides an optimal balance between aggressive compounding and variance protection. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          If your algorithm has a massive sample size (e.g., 5,000+ executions in out-of-sample live trading), you have a high degree of confidence in your Win Rate and Expected Value. When estimation error is low, you can afford to push closer to the peak of the curve. Half Kelly allows you to rapidly compound your capital without crossing the threshold into mathematical suicide.
+        </p>
+        <div class="bg-black/20 border border-[var(--liquid-input-border)] p-6 rounded-xl border-l-4 border-l-orange-400 mt-2">
+          <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
+            <strong class="text-white">When to use Half Kelly:</strong> Use Half Kelly when your system is thoroughly forward-tested, the market regime is highly stable, your slippage calculations are exact, and your psychological tolerance can handle localized drawdowns of 20% to 30% without you manually overriding the trading bot.
+          </p>
+        </div>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          The Case for Quarter Kelly: The Retail Holy Grail
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Retail traders hate Quarter Kelly because it feels too slow. They see "25% Risk" and assume they are leaving money on the table. This is a fatal miscalculation. Quarter Kelly is mathematically superior for 99% of retail traders due to one unavoidable factor: <strong>Estimation Error</strong>.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          The Kelly formula assumes you know your exact edge. You don't. Your win rate is based on historical data, which is a lagging indicator. If you backtested a 55% win rate, but the live market regime shifts and your true forward edge is only 51%, the "optimal" Kelly fraction drastically shrinks.
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          If you were trading Full Kelly or Half Kelly on a 55% assumed edge, and the edge decays to 51%, you are suddenly over-betting. You have unknowingly crossed the peak of the Kelly curve into negative asymmetry. You will bleed capital rapidly.
+        </p>
+        
+        <div class="bg-black/20 border border-[var(--liquid-input-border)] p-6 rounded-xl border-l-4 border-l-[var(--theme-accent-blue)] mt-2">
+          <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
+            <strong class="text-white">Quarter Kelly acts as a mathematical margin of safety.</strong> It absorbs your estimation errors, your backfitting flaws, and your hidden slippage. By cutting risk to 25%, you retain over 56% of the growth power, but you drop your variance penalty to near zero. A string of 10 consecutive losses on a Quarter Kelly model is a minor inconvenience; on a Full Kelly model, it is a catastrophic portfolio failure.
+          </p>
+        </div>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col gap-6 rounded-2xl bg-[var(--theme-input-bg)] border border-[var(--liquid-input-border)] shadow-lg backdrop-blur-md">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight border-b border-[var(--liquid-input-border)] pb-4">
+          The Brutal Conclusion
+        </h2>
+        <p class="text-base text-gray-300 leading-relaxed">
+          Stop lying to yourself about the certainty of your edge. Unless you are running an institutional HFT firm with a million-trade dataset, your inputs are estimations. 
+        </p>
+        <p class="text-base text-gray-300 leading-relaxed">
+          <strong>Start with Quarter Kelly.</strong> Prove your edge in live markets for 1,000 executions. Prove that you can survive the inevitable mathematical losing streak without manually intervening or changing your algorithm's logic. Only once you have verifiable, friction-adjusted live data that proves your edge is stable should you even consider scaling up to Half Kelly.
+        </p>
+      </div>
+
+      <div class="w-full p-8 md:p-12 flex flex-col items-center text-center gap-6 rounded-[2rem] bg-gradient-to-b from-[var(--theme-accent-blue)]/10 to-transparent border border-white/[0.05] shadow-[0_0_30px_rgba(10,132,255,0.05)]">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[var(--theme-text-main)] tracking-tight">
+          Stop Guessing. Start Calculating.
+        </h2>
+        <p class="text-base text-gray-300 max-w-2xl leading-relaxed">
+          See the mathematical difference for yourself. Input your system's win rate and payoff odds into our engine. Toggle between Full, Half, and Quarter Kelly to instantly visualize how fractional sizing transforms your risk of ruin and capital growth trajectories.
+        </p>
+        <a href="/" class="liquid-btn inline-flex items-center justify-center px-10 py-4 text-lg font-bold tracking-tight mt-4 border border-white/10 hover:bg-white/5 transition-colors">
+          Open the Calculator Engine
+        </a>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Quarter Kelly vs. Half Kelly: Which is Better?",
+  "description": "A deep mathematical analysis of the geometric growth curves and variance penalties between Quarter Kelly and Half Kelly position sizing.",
+  "author": {
+    "@type": "Person",
+    "name": "EV Kelly Engine"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "EV Kelly Calculator",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://evkellycalc.com/favicon.svg"
+    }
+  },
+  "datePublished": "2026-06-25",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://evkellycalc.com/blog/quarter-kelly-vs-half-kelly"
+  },
+  "wordCount": "1048"
+}
+</script>
