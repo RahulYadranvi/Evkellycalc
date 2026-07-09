@@ -5,4 +5,4 @@ Allow: /
 Disallow: /404
 Disallow: /500
 
-Sitemap: https://evkellycalc.com/sitemap.xml
+Sitemap: https://evkellycalc.com/sitemap-index.xml
