@@ -19,7 +19,6 @@ import Layout from '../layouts/Layout.astro';
 
     <div class="animate-reveal delay-200 flex flex-col gap-8 w-full" style="opacity: 0;">
       
-      <!-- Panel 1 -->
       <section class="liquid-panel static-panel w-full px-8 pb-8 md:px-10 md:pb-10 pt-0 flex flex-col items-center text-center border border-white/[0.12] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
         <div class="w-full border-b border-[var(--liquid-input-border)] py-8 md:py-10 mb-6">
           <h2 class="text-2xl font-bold text-white tracking-tight m-0 leading-none">
@@ -31,7 +30,6 @@ import Layout from '../layouts/Layout.astro';
         </p>
       </section>
 
-      <!-- Panel 2 -->
       <section class="liquid-panel static-panel w-full px-8 pb-8 md:px-10 md:pb-10 pt-0 flex flex-col items-center text-center border border-white/[0.12] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
         <div class="w-full border-b border-[var(--liquid-input-border)] py-8 md:py-10 mb-6">
           <h2 class="text-2xl font-bold text-white tracking-tight m-0 leading-none">
@@ -43,7 +41,6 @@ import Layout from '../layouts/Layout.astro';
         </p>
       </section>
 
-      <!-- Panel 3 -->
       <section class="liquid-panel static-panel w-full px-8 pb-8 md:px-10 md:pb-10 pt-0 flex flex-col items-center text-center border border-white/[0.12] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
         <div class="w-full border-b border-[var(--liquid-input-border)] py-8 md:py-10 mb-6">
           <h2 class="text-2xl font-bold text-white tracking-tight m-0 leading-none">
@@ -55,18 +52,39 @@ import Layout from '../layouts/Layout.astro';
         </p>
       </section>
 
-      <!-- Panel 4: AdSense E-E-A-T Compliance -->
       <section class="liquid-panel static-panel w-full px-8 pb-8 md:px-10 md:pb-10 pt-0 flex flex-col items-center text-center border border-white/[0.12] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
         <div class="w-full border-b border-[var(--liquid-input-border)] py-8 md:py-10 mb-6">
           <h2 class="text-2xl font-bold text-white tracking-tight m-0 leading-none">
             The Developer
           </h2>
         </div>
-        <p class="text-base text-[var(--theme-text-muted)] leading-relaxed">
-          The EV Kelly engine is developed and maintained by Rahul. With a strong background in full-stack web development and a strict focus on algorithmic performance tracking, the platform was engineered to bridge the gap between complex quantitative models and accessible retail tools. The architecture reflects a commitment to mathematical reality, institutional-grade design, and zero-compromise data privacy.
+        <p class="text-base text-[var(--theme-text-muted)] leading-relaxed mb-4">
+          The EV Kelly engine is engineered and maintained by Rahul Yadranvi. With a specialized background in modern full-stack web development (Next.js, TypeScript), the platform was built to bridge the gap between complex quantitative models and accessible retail tools. The architecture reflects a commitment to mathematical reality, institutional-grade design, and zero-compromise data privacy.
         </p>
+        <div class="flex gap-4 mt-2 justify-center">
+          <a href="https://github.com/RahulYadranvi" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-[var(--theme-accent-blue)] hover:text-white transition-colors">
+            View GitHub Profile &rarr;
+          </a>
+          <a href="https://www.linkedin.com/in/rahulyadranvi/" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-[var(--theme-accent-blue)] hover:text-white transition-colors">
+            View LinkedIn &rarr;
+          </a>
+        </div>
       </section>
 
     </div>
   </div>
 </Layout>
+
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Rahul Yadranvi",
+  "url": "https://evkellycalc.com/about",
+  "jobTitle": "Full-Stack Software Engineer",
+  "sameAs": [
+    "https://github.com/RahulYadranvi",
+    "https://www.linkedin.com/in/rahulyadranvi/"
+  ]
+}
+</script>

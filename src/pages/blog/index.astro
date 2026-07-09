@@ -150,7 +150,7 @@ import Layout from '../../layouts/Layout.astro';
       <a href="/blog/overfitting-in-backtesting" class="article-card hidden opacity-0 translate-y-8 scale-95 liquid-panel static-panel group flex-col p-6 sm:p-8 border border-white/[0.12] hover:border-white/[0.25] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 ease-out">
         <div class="flex items-center gap-3 mb-4">
           <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--theme-accent-green)] bg-[var(--theme-accent-green)]/10 rounded-full border border-[var(--theme-accent-green)]/20">Algorithms</span>
-          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">August 2026</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">July 2026</span>
         </div>
         <h2 class="text-2xl font-bold text-white group-hover:text-[var(--theme-accent-green)] transition-colors mb-3 leading-tight tracking-tight">
           Overfitting in Backtesting: The Silent Killer
@@ -166,7 +166,7 @@ import Layout from '../../layouts/Layout.astro';
       <a href="/blog/law-of-large-numbers" class="article-card hidden opacity-0 translate-y-8 scale-95 liquid-panel static-panel group flex-col p-6 sm:p-8 border border-white/[0.12] hover:border-white/[0.25] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 ease-out">
         <div class="flex items-center gap-3 mb-4">
           <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--theme-accent-blue)] bg-[var(--theme-accent-blue)]/10 rounded-full border border-[var(--theme-accent-blue)]/20">The Mathematics</span>
-          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">August 2026</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">July 2026</span>
         </div>
         <h2 class="text-2xl font-bold text-white group-hover:text-[var(--theme-accent-blue)] transition-colors mb-3 leading-tight tracking-tight">
           Understanding the Law of Large Numbers
@@ -182,7 +182,7 @@ import Layout from '../../layouts/Layout.astro';
       <a href="/blog/correlation-and-portfolio-variance" class="article-card hidden opacity-0 translate-y-8 scale-95 liquid-panel static-panel group flex-col p-6 sm:p-8 border border-white/[0.12] hover:border-white/[0.25] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 ease-out">
         <div class="flex items-center gap-3 mb-4">
           <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--theme-accent-red)] bg-[var(--theme-accent-red)]/10 rounded-full border border-[var(--theme-accent-red)]/20">Risk Management</span>
-          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">August 2026</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">July 2026</span>
         </div>
         <h2 class="text-2xl font-bold text-white group-hover:text-[var(--theme-accent-red)] transition-colors mb-3 leading-tight tracking-tight">
           Correlation and Portfolio Variance
@@ -198,7 +198,7 @@ import Layout from '../../layouts/Layout.astro';
       <a href="/blog/asymmetric-leverage" class="article-card hidden opacity-0 translate-y-8 scale-95 liquid-panel static-panel group flex-col p-6 sm:p-8 border border-white/[0.12] hover:border-white/[0.25] shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-all duration-500 ease-out">
         <div class="flex items-center gap-3 mb-4">
           <span class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[var(--theme-accent-blue)] bg-[var(--theme-accent-blue)]/10 rounded-full border border-[var(--theme-accent-blue)]/20">Position Sizing</span>
-          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">August 2026</span>
+          <span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">July 2026</span>
         </div>
         <h2 class="text-2xl font-bold text-white group-hover:text-[var(--theme-accent-blue)] transition-colors mb-3 leading-tight tracking-tight">
           Asymmetric Leverage: Why Losses Hurt More
@@ -227,19 +227,27 @@ import Layout from '../../layouts/Layout.astro';
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    // FIX: Strongly type the NodeList as HTMLElement so TS knows they have style and classList
     const cards = document.querySelectorAll('.article-card') as NodeListOf<HTMLElement>;
     const loadMoreBtn = document.getElementById('load-more-btn');
     const loadLessBtn = document.getElementById('load-less-btn');
     
     const BATCH_SIZE = 8;
-    let visibleCount = parseInt(sessionStorage.getItem('evKellyBlogVisible') || '4', 10);
+    let visibleCount = 4;
+    
+    // STRICT BROWSER STORAGE HANDLING
+    try {
+      const storedCount = sessionStorage.getItem('evKellyBlogVisible');
+      if (storedCount) {
+        visibleCount = parseInt(storedCount, 10);
+      }
+    } catch (e) {
+      console.warn("Storage access restricted. State will not persist across sessions.");
+    }
 
     if (isNaN(visibleCount) || visibleCount < 4) visibleCount = 4;
     if (visibleCount > cards.length) visibleCount = cards.length;
 
     function renderGrid(isLoadMore = false) {
-      // FIX: Declare type as HTMLElement | null to remove assignment errors
       let firstNewlyRevealed: HTMLElement | null = null;
       const targetVisibleCount = visibleCount;
 
@@ -249,7 +257,6 @@ import Layout from '../../layouts/Layout.astro';
             card.classList.remove('hidden');
             card.classList.add('flex');
             
-            // FIX: Variable is now typed correctly for this assignment
             if (!firstNewlyRevealed) firstNewlyRevealed = card;
             
             requestAnimationFrame(() => {
@@ -283,18 +290,21 @@ import Layout from '../../layouts/Layout.astro';
       }
 
       if (isLoadMore && firstNewlyRevealed) {
-        // FIX: Cast as HTMLElement to guarantee scrollIntoView is available
         const targetElement = firstNewlyRevealed as HTMLElement;
         window.setTimeout(() => {
           targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 100);
       } else if (!isLoadMore && loadLessBtn) {
         const gridTop = document.getElementById('blog-grid');
-        // FIX: Ensure gridTop exists before calling scrollIntoView
         if (gridTop) gridTop.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
 
-      sessionStorage.setItem('evKellyBlogVisible', targetVisibleCount.toString());
+      // STRICT BROWSER STORAGE HANDLING
+      try {
+        sessionStorage.setItem('evKellyBlogVisible', targetVisibleCount.toString());
+      } catch (e) {
+        // Silently fail if storage is restricted
+      }
     }
 
     if (loadMoreBtn) {

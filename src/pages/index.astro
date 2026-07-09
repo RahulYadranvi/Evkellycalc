@@ -6,7 +6,7 @@ import Layout from '../layouts/Layout.astro';
   title="EV Kelly Calculator | Position Sizing & Variance Mechanics"
   description="Calculate your mathematical edge, fractional Kelly sizing, and Risk of Ruin with our free quantitative finance position sizing tool."
 >
-  <main class="max-w-[1400px] mx-auto w-full px-4 sm:px-8 md:px-16 pt-2 pb-0">
+  <div id="main-content" class="max-w-[1400px] mx-auto w-full px-4 sm:px-8 md:px-16 pt-2 pb-0">
     <div class="flex-1 px-4 sm:px-8 md:px-16 lg:px-24 pt-0 pb-4 flex flex-col gap-6 relative">
 
       <header class="max-w-[1100px] mx-auto mb-10 sm:mb-14 flex flex-col items-center text-center">
@@ -240,14 +240,14 @@ import Layout from '../layouts/Layout.astro';
         <div class="flex flex-col gap-3 faq-container">
           
           <div class="liquid-panel static-panel faq-item overflow-hidden transition-all duration-300 rounded-xl">
-            <button class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
+            <button id="faq-btn-1" aria-expanded="false" aria-controls="faq-panel-1" class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
               <h3 class="text-base sm:text-lg font-semibold text-white pr-6">What is the Kelly Criterion in trading?</h3>
               <div class="relative flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white/5 rounded-full border border-white/10">
                  <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] transition-transform duration-300 rounded-full"></span>
                  <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] rotate-90 transition-transform duration-300 faq-vertical-line rounded-full"></span>
               </div>
             </button>
-            <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+            <div id="faq-panel-1" role="region" aria-labelledby="faq-btn-1" class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
               <div class="overflow-hidden">
                 <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
                   The Kelly Criterion is a mathematical formula that calculates the exact optimal fraction of your capital to risk on a single trade. It mathematically maximizes long-term geometric compounding while preventing total account ruin.
@@ -257,14 +257,14 @@ import Layout from '../layouts/Layout.astro';
           </div>
 
           <div class="liquid-panel static-panel faq-item overflow-hidden transition-all duration-300 rounded-xl">
-            <button class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
+            <button id="faq-btn-2" aria-expanded="false" aria-controls="faq-panel-2" class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
               <h3 class="text-base sm:text-lg font-semibold text-white pr-6">What is Expected Value (EV)?</h3>
               <div class="relative flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white/5 rounded-full border border-white/10">
                  <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] transition-transform duration-300 rounded-full"></span>
                  <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] rotate-90 transition-transform duration-300 faq-vertical-line rounded-full"></span>
               </div>
             </button>
-            <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+            <div id="faq-panel-2" role="region" aria-labelledby="faq-btn-2" class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
               <div class="overflow-hidden">
                 <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
                   Expected Value (EV) is the average mathematical outcome of a trade if it were repeated infinitely. A positive EV means a strategy is profitable over time, which is required before applying the Kelly formula.
@@ -274,14 +274,14 @@ import Layout from '../layouts/Layout.astro';
           </div>
 
           <div class="liquid-panel static-panel faq-item overflow-hidden transition-all duration-300 rounded-xl">
-            <button class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
+            <button id="faq-btn-3" aria-expanded="false" aria-controls="faq-panel-3" class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
               <h3 class="text-base sm:text-lg font-semibold text-white pr-6">Why should I use Half or Quarter Kelly?</h3>
               <div class="relative flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white/5 rounded-full border border-white/10">
                  <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] transition-transform duration-300 rounded-full"></span>
                  <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] rotate-90 transition-transform duration-300 faq-vertical-line rounded-full"></span>
               </div>
             </button>
-            <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+            <div id="faq-panel-3" role="region" aria-labelledby="faq-btn-3" class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
               <div class="overflow-hidden">
                 <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
                   Trading "Full Kelly" guarantees massive drawdowns due to normal statistical variance. Half and Quarter Kelly drastically reduce your volatility and Risk of Ruin while still capturing the vast majority of the optimal compounding curve.
@@ -291,14 +291,14 @@ import Layout from '../layouts/Layout.astro';
           </div>
 
           <div class="liquid-panel static-panel faq-item overflow-hidden transition-all duration-300 rounded-xl">
-            <button class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
+            <button id="faq-btn-4" aria-expanded="false" aria-controls="faq-panel-4" class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
               <h3 class="text-base sm:text-lg font-semibold text-white pr-6">What does Risk of Ruin mean?</h3>
               <div class="relative flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white/5 rounded-full border border-white/10">
                  <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] transition-transform duration-300 rounded-full"></span>
                  <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] rotate-90 transition-transform duration-300 faq-vertical-line rounded-full"></span>
               </div>
             </button>
-            <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+            <div id="faq-panel-4" role="region" aria-labelledby="faq-btn-4" class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
               <div class="overflow-hidden">
                 <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
                   Risk of Ruin is the statistical probability that your trading account will hit your defined stop-loss limit based on your current win rate, reward-to-risk ratio, and position size.
@@ -308,14 +308,14 @@ import Layout from '../layouts/Layout.astro';
           </div>
 
           <div class="liquid-panel static-panel faq-item overflow-hidden transition-all duration-300 rounded-xl">
-            <button class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
+            <button id="faq-btn-5" aria-expanded="false" aria-controls="faq-panel-5" class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
               <h3 class="text-base sm:text-lg font-semibold text-white pr-6">How do I calculate my Reward-to-Risk ratio?</h3>
               <div class="relative flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white/5 rounded-full border border-white/10">
                  <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] transition-transform duration-300 rounded-full"></span>
                  <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] rotate-90 transition-transform duration-300 faq-vertical-line rounded-full"></span>
               </div>
             </button>
-            <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+            <div id="faq-panel-5" role="region" aria-labelledby="faq-btn-5" class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
               <div class="overflow-hidden">
                 <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
                   Divide your average net profit on winning trades by your average net loss on losing trades. For example, if you risk $100 to make $200, your net Reward-to-Risk ratio is 2.0.
@@ -325,14 +325,14 @@ import Layout from '../layouts/Layout.astro';
           </div>
 
           <div class="liquid-panel static-panel faq-item overflow-hidden transition-all duration-300 rounded-xl">
-            <button class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
+            <button id="faq-btn-6" aria-expanded="false" aria-controls="faq-panel-6" class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
               <h3 class="text-base sm:text-lg font-semibold text-white pr-6">What happens if my win rate is below 50%?</h3>
               <div class="relative flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white/5 rounded-full border border-white/10">
                  <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] transition-transform duration-300 rounded-full"></span>
                  <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] rotate-90 transition-transform duration-300 faq-vertical-line rounded-full"></span>
               </div>
             </button>
-            <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+            <div id="faq-panel-6" role="region" aria-labelledby="faq-btn-6" class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
               <div class="overflow-hidden">
                 <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
                   You can still have a highly profitable Expected Value with a win rate below 50%, provided your Reward-to-Risk ratio is exceptionally high. The calculator will automatically account for this and provide the correct fractional sizing.
@@ -342,14 +342,14 @@ import Layout from '../layouts/Layout.astro';
           </div>
 
           <div class="liquid-panel static-panel faq-item overflow-hidden transition-all duration-300 rounded-xl">
-            <button class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
+            <button id="faq-btn-7" aria-expanded="false" aria-controls="faq-panel-7" class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
               <h3 class="text-base sm:text-lg font-semibold text-white pr-6">Does the Kelly Criterion account for slippage and commissions?</h3>
               <div class="relative flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white/5 rounded-full border border-white/10">
                  <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] transition-transform duration-300 rounded-full"></span>
                  <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] rotate-90 transition-transform duration-300 faq-vertical-line rounded-full"></span>
               </div>
             </button>
-            <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+            <div id="faq-panel-7" role="region" aria-labelledby="faq-btn-7" class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
               <div class="overflow-hidden">
                 <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
                   No. The raw mathematical formula assumes frictionless execution. To get an accurate calculation, you must input your <i>net</i> metrics—meaning your average wins and losses should already have slippage and broker fees subtracted before calculating your ratio.
@@ -359,14 +359,14 @@ import Layout from '../layouts/Layout.astro';
           </div>
 
           <div class="liquid-panel static-panel faq-item overflow-hidden transition-all duration-300 rounded-xl">
-            <button class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
+            <button id="faq-btn-8" aria-expanded="false" aria-controls="faq-panel-8" class="faq-button w-full text-left p-4 sm:p-6 flex justify-between items-center focus:outline-none hover:bg-white/[0.02] transition-colors">
               <h3 class="text-base sm:text-lg font-semibold text-white pr-6">Can I use this calculator for crypto and forex?</h3>
               <div class="relative flex-shrink-0 w-6 h-6 flex items-center justify-center bg-white/5 rounded-full border border-white/10">
                  <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] transition-transform duration-300 rounded-full"></span>
                  <span class="absolute w-2.5 h-0.5 bg-[var(--theme-accent-blue)] rotate-90 transition-transform duration-300 faq-vertical-line rounded-full"></span>
               </div>
             </button>
-            <div class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
+            <div id="faq-panel-8" role="region" aria-labelledby="faq-btn-8" class="faq-answer grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out">
               <div class="overflow-hidden">
                 <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed px-4 sm:px-6 pb-4 sm:pb-6 pt-0">
                   Yes. The math behind the Kelly formula is universal. As long as you know your historical win rate and net reward-to-risk ratio, you can use the engine to optimize sizing for stocks, crypto, forex, or any probabilistic event.
@@ -379,11 +379,12 @@ import Layout from '../layouts/Layout.astro';
       </div>
 
     </div>
-  </main>
+  </div>
 </Layout>
 
 <script>
-  import Chart from 'chart.js/auto';
+  import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, Filler, Tooltip } from 'chart.js';
+  Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, Filler, Tooltip);
 
   let growthChart: Chart | null = null;
   let dom: Record<string, HTMLElement | HTMLInputElement> = {};
@@ -404,20 +405,20 @@ import Layout from '../layouts/Layout.astro';
     Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
   }
 
+  const currencyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+
   function formatCurrency(value: number, compact: boolean = false): string {
+    if (isNaN(value)) return '$0';
+    if (!isFinite(value)) return 'Max Exceeded';
     if (value === 0) return "$0";
-    if (value < 0) return "-" + formatCurrency(-value, compact);
+    if (value < 0) return `-$${currencyFormatter.format(Math.abs(value)).replace('$', '')}`;
     
     if (value >= 1e15) {
       return "$" + value.toExponential(2);
     }
 
     if (!compact || value < 1000000) {
-      return new Intl.NumberFormat('en-US', { 
-        style: 'currency', 
-        currency: 'USD',
-        maximumFractionDigits: 0
-      }).format(value);
+      return currencyFormatter.format(value);
     }
     
     const suffixes = ["", "K", "M", "B", "T"];
@@ -442,13 +443,12 @@ import Layout from '../layouts/Layout.astro';
     const capInput = dom.capital as HTMLInputElement;
     const stopInput = dom.stopLoss as HTMLInputElement;
 
-    // 1. INSTANT VALIDATION (Triggered on keystroke, regardless of empty fields)
     let winErrorActive = false;
     if (winInput.value !== '') {
       let rawWin = parseFloat(winInput.value);
       if (rawWin > 100) {
-        winInput.value = ''; // Instantly clear the field
-        if (dom.winProbError) dom.winProbError.classList.remove('hidden'); // Throw error
+        winInput.value = ''; 
+        if (dom.winProbError) dom.winProbError.classList.remove('hidden'); 
         winErrorActive = true;
       } else if (rawWin < 0) {
         winInput.value = '';
@@ -458,12 +458,10 @@ import Layout from '../layouts/Layout.astro';
       }
     }
 
-    // Hide error automatically if user manually backspaces to empty
     if (winInput.value === '' && !winErrorActive) {
       if (dom.winProbError) dom.winProbError.classList.add('hidden');
     }
 
-    // Silently fix stop loss bounds
     if (stopInput.value !== '') {
       let rawStop = parseFloat(stopInput.value);
       if (rawStop > 99 || rawStop < 1) {
@@ -471,7 +469,6 @@ import Layout from '../layouts/Layout.astro';
       }
     }
 
-    // 2. ZERO STATE RE-RENDER
     if (winInput.value === '' || rewardInput.value === '' || capInput.value === '' || stopInput.value === '') {
         if (dom.evOutput) {
           dom.evOutput.style.color = 'inherit';
@@ -488,13 +485,12 @@ import Layout from '../layouts/Layout.astro';
         if (dom.quarterKellyAmt) dom.quarterKellyAmt.textContent = '$0';
         
         if (dom.rorOutput) dom.rorOutput.textContent = '0.00%';
-        if (dom.rorDesc) dom.rorDesc.innerHTML = `Probability of hitting stop loss using Half Kelly.`;
+        if (dom.rorDesc) dom.rorDesc.textContent = `Probability of hitting stop loss using Half Kelly.`;
         
         updateChart(0, 0, 0, 0, 0, 0); 
         return; 
     }
 
-    // 3. MATH ENGINE EXECUTION
     let rawWinProb = parseFloat(winInput.value) || 0;
     let rawRewardRisk = parseFloat(rewardInput.value) || 0;
     let rawCapital = parseFloat(capInput.value) || 0;
@@ -515,11 +511,9 @@ import Layout from '../layouts/Layout.astro';
     const halfKelly = fullKelly / 2;
     const quarterKelly = fullKelly / 4;
 
-    let ror = 1.0; 
-    if (fullKelly > 0 && ev > 0) {
-      const threshold = 1 - stopLoss;
-      const f = 0.5; 
-      ror = Math.pow(threshold, (2 / f) - 1);
+    let ror = 0; 
+    if (halfKelly > 0 && ev > 0 && p > 0 && p < 1) {
+      ror = Math.pow((1 - p) / p, stopLoss / halfKelly);
       ror = Math.min(1, Math.max(0, ror)); 
     }
 
@@ -547,7 +541,7 @@ import Layout from '../layouts/Layout.astro';
     dom.rorOutput.textContent = `${(ror * 100).toFixed(2)}%`;
     
     if (dom.rorDesc) {
-      dom.rorDesc.innerHTML = `At Half Kelly, the mathematical probability of hitting a <strong>${(stopLoss * 100).toFixed(0)}% drawdown</strong>.`;
+      dom.rorDesc.textContent = `At Half Kelly, the mathematical probability of hitting a ${(stopLoss * 100).toFixed(0)}% drawdown.`;
     }
 
     updateChart(capital, fullKelly, halfKelly, quarterKelly, p, b);
@@ -581,7 +575,11 @@ import Layout from '../layouts/Layout.astro';
     if (!ctx) return;
     
     if (growthChart) {
-      growthChart.destroy(); 
+      growthChart.data.datasets[0].data = dataFull;
+      growthChart.data.datasets[1].data = dataHalf;
+      growthChart.data.datasets[2].data = dataQuarter;
+      growthChart.update();
+      return;
     }
 
     const chartCtx = ctx.getContext('2d');
@@ -721,6 +719,8 @@ import Layout from '../layouts/Layout.astro';
 
         document.querySelectorAll('.faq-item').forEach(item => {
           item.classList.remove('active');
+          const btn = item.querySelector('.faq-button');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
           const answer = item.querySelector('.faq-answer') as HTMLElement;
           const icon = item.querySelector('.faq-vertical-line') as HTMLElement;
           if(answer) answer.style.gridTemplateRows = '0fr';
@@ -729,6 +729,7 @@ import Layout from '../layouts/Layout.astro';
 
         if (!isActive) {
           faqItem.classList.add('active');
+          button.setAttribute('aria-expanded', 'true');
           const answer = faqItem.querySelector('.faq-answer') as HTMLElement;
           const icon = faqItem.querySelector('.faq-vertical-line') as HTMLElement;
           if(answer) answer.style.gridTemplateRows = '1fr';
@@ -737,7 +738,7 @@ import Layout from '../layouts/Layout.astro';
       });
     });
     
-    let inputDebounceTimer: any;
+    let inputDebounceTimer: ReturnType<typeof setTimeout>;
     const debouncedCalculate = () => {
       clearTimeout(inputDebounceTimer);
       inputDebounceTimer = setTimeout(() => { 
@@ -773,7 +774,7 @@ import Layout from '../layouts/Layout.astro';
       });
     }
     
-    let resizeTimer: any;
+    let resizeTimer: ReturnType<typeof setTimeout>;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
