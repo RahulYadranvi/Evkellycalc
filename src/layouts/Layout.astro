@@ -38,11 +38,19 @@ const {
         <meta name="description" content={description} />
         <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
         
+        <!-- Open Graph Meta Tags -->
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+        <meta property="og:image" content="https://evkellycalc.com/opengraph-image.jpg" />
+        
+        <!-- Twitter Meta Tags -->
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content={new URL(Astro.url.pathname, Astro.site)} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content="https://evkellycalc.com/opengraph-image.jpg" />
         
         <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
